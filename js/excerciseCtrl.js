@@ -7,4 +7,8 @@ $scope.setExcercise = function(x){
 	$scope.excercise = x;
 };
 
+$scope.setShow = function(s){
+	$scope.show = s;
+};
+
 });

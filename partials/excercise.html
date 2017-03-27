@@ -7,63 +7,62 @@
 		<h1>Excercises</h1>
 	</div> 
 
-<div class="w3-margin">
-	<i class="fa fa-cogs w3-margin" style="font-size:70px;color:teal;"></i>
-	
-	<div class="w3-row">
-	
-	<div class="w3-col s3 l2 w3-mobile">
-		<div class="w3-margin" ng-repeat="x in [1,2,3,4,5]">
-			<button type="button" class="w3-button w3-teal w3-card" ng-click="setExcercise(x)"><i class="fa fa-pencil"></i> Excercise {{ x }}</button>
-		</div>
-	</div>
-	
-	
-
-	<div class="w3-card w3-animate-right w3-col s9 l10" ng-repeat="x in [1,2,3,4,5]" ng-if="excercise == x">
-		<div class="w3-margin">
-			<div class="w3-bar">
-				<h4 class="w3-text-teal w3-left"><i class="fa fa-pencil" style="font-size:20px;color:teal;"></i> Excercise {{x}}</h4>
-				<h4 class="w3-text-teal w3-right">Attempts: 0</h4>
+	<div class="w3-margin">
+		<i class="fa fa-cogs w3-margin" style="font-size:70px;color:teal;"></i>
+		<br>
+		<!--
+		<div class="w3-col s3 l2 w3-mobile">
+			<div class="w3-margin" ng-repeat="x in [1,2,3,4,5]">
+				<button type="button" class="w3-button w3-teal w3-card" ng-click="setExcercise(x)"><i class="fa fa-pencil"></i> Excercise {{ x }}</button>
 			</div>
-			<br>
-			
-			 <div class="w3-card-2" style="width:50%">
-				<img src="/echo/images/chamber.gif" style="width:100%">
-				<div class="w3-container">
-					<h4><b>A image.</b></h4>
-					<p>Nice looking image.</p>
-				</div>
-			</div>
-			<br>
-			
-			<p class="question">1. Give your answer.</p>
-			<ul class="answers">
-				<input type="radio" name="q1" value="a" id="q1a"><label for="q1a">Answer 1</label><br/>
-				<input type="radio" name="q1" value="b" id="q1b"><label for="q1b">Answer 2</label><br/>
-				<input type="radio" name="q1" value="c" id="q1c"><label for="q1c">Answer 3</label><br/>
-				<input type="radio" name="q1" value="d" id="q1d"><label for="q1d">Answer 4</label><br/>
-			</ul>
-
-
-			<br>
-
-			<div class="w3-cell">
-				<p class="question">2. Write your answer.</p>
-				<input type="text" class="form-control">
-				</div>
-			<br>
-			
-			<div class="w3-bar">
-				<button class="w3-button w3-card w3-teal"><i class="fa fa-cog"></i> Submit</button>
-			<div>
-			
 		</div>
-	</div>
-
-	</div>
+		-->
 		
-</div>	
-	
+		<ul class="w3-ul w3-hoverable w3-card-4 w3-teal w3-animate-right" ng-hide="show">
+			<li class="w3-hover-white" ng-repeat="x in [1,2,3,4,5]" ng-click="setExcercise(x); setShow(true)"><i class="fa fa-pencil"></i> Excercise {{ x }}<span class="w3-right">0 attempts</span></li>
+		</ul>
+		
+		<div class="w3-bar w3-card w3-animate-right" ng-show="show">
+			
+			<div class="w3-margin">
+				<div class="w3-bar">
+					<h4 class="w3-text-teal w3-left"><i class="fa fa-pencil" style="font-size:20px;color:teal;"></i> Excercise {{excercise}}</h4>
+					<h4 class="w3-text-teal w3-right">Attempts: 0</h4>
+				</div>
+				<br>
+
+				<div class="w3-card-2" style="width:50%">
+					<img src="/echo/images/chamber.gif" style="width:100%">
+					<div class="w3-container">
+						<h4><b>A image.</b></h4>
+						<p>Nice looking image.</p>
+					</div>
+				</div>
+				<br>
+
+				<p class="question">1. Give your answer.</p>
+				<ul class="answers">
+					<input type="radio" name="q1" value="a" id="q1a"><label for="q1a">Answer 1</label><br/>
+					<input type="radio" name="q1" value="b" id="q1b"><label for="q1b">Answer 2</label><br/>
+					<input type="radio" name="q1" value="c" id="q1c"><label for="q1c">Answer 3</label><br/>
+					<input type="radio" name="q1" value="d" id="q1d"><label for="q1d">Answer 4</label><br/>
+				</ul>
+				<br>
+
+				<div class="w3-cell">
+					<p class="question">2. Write your answer.</p>
+					<input type="text" class="form-control">
+				</div>
+				<br>
+				
+				<div class="w3-bar">
+					<button class="w3-button w3-card w3-teal" ng-click="show = false"><i class="fa fa-cog"></i> Submit</button>
+					<span><button class="w3-button w3-card w3-teal" ng-click="show = false"><i class="fa fa-times"></i> Skip</button></span>
+				</div>
+			</div>
+
+		</div>
+		<br>
+	</div>	
 <!-- End page content -->
 </div>
