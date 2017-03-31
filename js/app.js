@@ -57,7 +57,7 @@ echoApp.config(['$routeProvider',
         templateUrl: 'partials/simulator.html',
         controller: 'simulatorCtrl'
       }).
-      when('/student', {
+      when('/students', {
         templateUrl: 'partials/students.html',
         controller: 'studentsCtrl'
       }).
