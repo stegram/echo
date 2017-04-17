@@ -27,18 +27,8 @@ which module to associate the app with. In app.js we create the "dinnerPlanner" 
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<link rel="stylesheet" href="style.css">
 
-  </head>
-
-	<style>
-	 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-	</style>
-
-  <body class="w3-light-grey">
-    <div ng-view></div>
-
-
-
-    <script src="https://www.gstatic.com/firebasejs/3.7.8/firebase.js"></script>
+    <!-- The snippet should be placed in the <head> section of index.html. -->
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
     <script>
       // Initialize Firebase
       var config = {
@@ -53,6 +43,18 @@ which module to associate the app with. In app.js we create the "dinnerPlanner" 
     </script>
 
 
+  </head>
+
+	<style>
+	 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+	</style>
+
+  <body class="w3-light-grey">
+    <div ng-view></div>
+
+
+
+
       <!-- jQuery -->
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
@@ -60,11 +62,11 @@ which module to associate the app with. In app.js we create the "dinnerPlanner" 
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   	<!-- Angular JavaScript including routing and resource modules  -->
-  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
-  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resource.min.js"></script>
-  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.min.js"></script>
-  	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-sanitize.js"></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.min.js"></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-resource.min.js"></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.min.js"></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
 
   	<!-- chart.js library-->
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>

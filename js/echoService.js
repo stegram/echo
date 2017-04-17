@@ -1,7 +1,5 @@
-echoApp.factory('echo',function ($resource, $cookieStore, $firebaseObject) {
-	var ref = firebase.database().ref();
-  // download the data into a local object
-  var data = $firebaseObject(ref);
+echoApp.factory('echo',function ($resource, $cookieStore) {
+
 
 
 	//id should prob be user names
@@ -164,7 +162,6 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseObject) {
 	var getImage = {
 	};
 
-	data["stefan"] = this.getAllExams();
 
 
   return this;
