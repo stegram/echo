@@ -1,4 +1,4 @@
-echoApp.controller('examCtrl', function ($scope, $firebaseArray, echo) {
+echoApp.controller('examCtrl', function ($scope, echo) {
 
 	$scope.show = true;
 	$scope.exam;
@@ -24,8 +24,7 @@ echoApp.controller('examCtrl', function ($scope, $firebaseArray, echo) {
 		$scope.show = !$scope.show;
 	}
 
-	var ref = firebase.database().ref().child("exams");
-	$scope.exams = $firebaseArray(ref);
+	$scope.exams = echo.getAllExams();
 
 
 
@@ -40,11 +39,7 @@ echoApp.controller('examCtrl', function ($scope, $firebaseArray, echo) {
 
 	$scope.submit = function(){
 		var result = echo.judge($scope.exam);
-
-		// Save the whole exam under the users exams
-		var ref = firebase.database().ref().child("users").child(echo.getUser().name).child("exams");
-		var userExams = $firebaseArray(ref);
-		userExams.$add($scope.exam);
+		echo.saveTakenExam($scope.exam);
 
 		alert(result ? "YAY!" : "nej :(");
 	}
