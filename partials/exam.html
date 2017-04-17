@@ -1,0 +1,71 @@
+<ng-include src="'partials/dashboard.html'" ng-controller="dashboardCtrl"></ng-include>
+
+<!-- !PAGE CONTENT! -->
+<div class="rs-exam w3-main w3-white w3-card w3-animate-right" style="margin-left:312px;margin-top:118px;">
+
+	<div class="w3-panel w3-teal" ng-show="show">
+		<h1>Exam</h1>
+	</div>
+
+	<div class="w3-margin">
+		<i class="fa fa-graduation-cap w3-margin" style="font-size:70px;color:teal;" ng-show="show"></i>
+		<br>
+
+		<ul class="w3-ul w3-hoverable w3-card-4 w3-teal w3-animate-right" ng-show="show">
+			<li class="w3-hover-white" ng-repeat="exam in exams" ng-click="setExam(exam); setI($index); toggle()">
+				<i class="fa fa-pencil"></i> Exam {{ $index + 1}}<span class="w3-right">0 attempts</span>
+			</li>
+		</ul>
+
+		<div class="w3-bar w3-card w3-animate-right" ng-hide="show" ng-repeat="exam in exams" >
+
+			<div class="w3-margin" ng-show="$index == getI()" >
+
+				<div class="w3-bar">
+					<h2 class="w3-text-teal w3-left"> Exam {{i + 1}}</h2>
+				</div>
+				<br>
+
+				<div class="w3-bar">
+					<h3 class="w3-text w3-left"> Some title</h3>
+				</div>
+
+				<div class="w3-card-2" style="width:50%">
+					<img ng-src={{exam.imageUrl}} style="width:100%">
+					<div class="w3-container">
+						<h4><b>{{exam.imageTitle}}</b></h4>
+						<p>{{exam.imageText}}</p>
+					</div>
+				</div>
+				<br>
+
+				<form novalidate ng-submit="submit()">
+					<div class="form-group" ng-repeat="question in exam.questions">
+						{{question.text}}
+
+						<div ng-repeat="(index, alternative) in question.alternatives"><!-- || (question.guess !== index && question.answers === index) -->
+							<label ng-if="question.type === 'radio'" ng-class="{right: (question.guess === index && question.guess === question.answers), wrong: question.guess === index && question.guess !== question.answers}">
+								<input type="radio" ng-value="index" ng-model="question.guess" ng-disabled="exam.submitted"/>
+								{{alternative}}
+							</label>
+
+							<label ng-if="question.type === 'checkbox'" ng-class="{right: question.guess[index] === true && question.guess[index] === question.answers[index], wrong: question.guess[index] === true && question.guess[index] !== question.answers[index]}">
+								<input type="checkbox" ng-value="alternative" ng-model="question.guess[index]" ng-disabled="exam.submitted"/>
+								{{alternative}}
+							</label>
+						</div>
+
+						<!-- <pre>current question: {{question | json}}</pre> -->
+					</div>
+					<button type="button" class="w3-button w3-card w3-teal" ng-click="toggle()"><i class="fa fa-arrow-left"></i> Back</button>
+					<button type="submit" class="w3-button w3-card w3-teal" ng-click="toggle()" ng-disabled="exam.submitted"><i class="fa fa-check-square-o"></i> Submit</button>
+				</form>
+
+			</div>
+
+		</div>
+
+		<br>
+	</div>
+</div>
+<!-- End page content -->

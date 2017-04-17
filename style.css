@@ -98,3 +98,10 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }*/
+
+.rs-exam .ng-submitted .right {
+  color: #bada55;
+}
+.rs-exam .ng-submitted .wrong {
+  color: #d11d05;
+}

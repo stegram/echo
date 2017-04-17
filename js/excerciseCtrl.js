@@ -1,14 +1,21 @@
-echoApp.controller('excerciseCtrl', function ($scope) {
+echoApp.controller('excerciseCtrl', function ($scope, echo) {
 
-$scope.excercise = 1;
-$scope.show = false;
+$scope.show = true;
+$scope.exercise;
+$scope.answer;
 
-$scope.setExcercise = function(x){
-	$scope.excercise = x;
+$scope.toggle = function(){
+	$scope.show = !$scope.show;
+}
+
+$scope.setExercise = function(exer){
+	$scope.exercise = exer;
 };
 
-$scope.setShow = function(s){
-	$scope.show = s;
-};
+$scope.exercises = echo.getExercises();
+
+$scope.submit = function(){
+
+}
 
 });

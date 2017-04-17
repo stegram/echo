@@ -1,13 +1,13 @@
 <!-- Top container -->
 <header class="w3-bar w3-card w3-top w3-white w3-large w3-padding-large" style="z-index:4">
   <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-teal" onclick="w3_open();"><i class="fa fa-bars"></i> Menu</button>
-  <span class="w3-bar-item w3-right"><img class="w3-card" src="/echo/images/ds.jpg" width="80" height="70"></img></span>
+  <span class="w3-bar-item w3-right"><img class="w3-card" src="images/ds.jpg" width="80" height="70"></img></span>
 </header>
 
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-card w3-collapse" style="z-index:4;width:300px;" id="mySidebar"><br>
   <div class="w3-container w3-row">
-  
+
     <div class="w3-col s4">
       <i ng-if="!admin()" class="fa fa-user" style="font-size:70px;color:teal;"></i>
 	  <i ng-if="admin()" class="fa fa-user-md" style="font-size:70px;color:teal;"></i>
@@ -17,34 +17,36 @@
 	  <br>
 	  Last login: {{user.lastlogin}}
     </div>
-	
+
   </div>
-  
+
   <hr>
-  
+
   <div class="w3-bar-block" ng-if="!admin()">
-    
+
 	<a class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i> Close Menu</a>
-    
+
 	<a href="#/questions" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-md fa-fw"></i> Questions</a>
-    <a href="#/simulator" class="w3-bar-item w3-button w3-padding"> <i class="fa fa-heartbeat fa-fw"></i> Simulator</a>
-    <a href="#/excercise" class="w3-bar-item w3-button w3-padding"> <i class="fa fa-cogs fa-fw"></i> Excercises</a>
+  <a href="#/simulator" class="w3-bar-item w3-button w3-padding"> <i class="fa fa-heartbeat fa-fw"></i> Simulator</a>
+  <a href="#/excercise" class="w3-bar-item w3-button w3-padding"> <i class="fa fa-cogs fa-fw"></i> Excercises</a>
+  <a href="#/exam" class="w3-bar-item w3-button w3-padding"> <i class="fa fa-graduation-cap fa-fw"></i> Exam</a>
 	<a href="#/about" class="w3-bar-item w3-button w3-padding"> <i class="fa fa-comment fa-fw"></i> About</a><br><br>
+
 	<a href="#/login" class="w3-bar-item w3-button w3-padding"> <i class="fa fa-power-off fa-fw"></i> Logoff</a>
-  
+
   </div>
-  
+
   <div class="w3-bar-block" ng-if="admin()">
-    
+
 	<a class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i> Close Menu</a>
-    
+
 	<a href="#/students" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw"></i> Students</a><br><br>
 	<a href="#/login" class="w3-bar-item w3-button w3-padding"> <i class="fa fa-power-off fa-fw"></i> Logoff</a>
-  
+
   </div>
-  
-  
-  
+
+
+
 </nav>
 
 <!-- Overlay effect when opening sidebar on small screens -->
