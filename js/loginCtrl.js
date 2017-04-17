@@ -1,77 +1,45 @@
-echoApp.controller('loginCtrl', function ($scope, $location, $timeout, echo) {
+echoApp.controller('loginCtrl', function ($scope, $timeout, $location, echo) {
 
 $scope.user = "";
-$scope.password = "";
 
-
+$scope.show = false;
 
 $scope.accept = false;
+var users = echo.getRegisteredUsers();
+
 
 $scope.login = function() {
-	$('i').addClass('fa-spin');
+	if (!$scope.user)
+		return;
 
+	$scope.loading = true;
+	$scope.wrongUser = false;
 
-	echo.registeredUsers.get({},function(users){
+	var syncObject = echo.checkUser($scope.user);
+	//syncObject.$bindTo($scope, "usr");
+	syncObject.$loaded(function (user) {
+		var exists = user.$value !== null;
+		$scope.loading = false;
 
+		if(exists){
+			echo.setUser(user.$id);
 
-
-	// palla!
-	$scope.user = "cristina";
-	$scope.password = users[$scope.user].password;
-
-	$timeout(function(){
-
-		for(name in users){
-
-			if(name == $scope.user){
-
-				if(users[name].password == $scope.password){
-
-					$scope.accept = false;
-
-
-					echo.setLoginUser(users[name]);
-
-
-					echo.setUser(name);
-
-
-					$('form').removeClass('ahashakeheartache');
-
-					if(users[name].title == "admin"){
-						$location.path('/students');
-					}else{
-
-						$location.path('/home');
-
-						$location.path('/exam');
-
-					};
-
-					return;
-				};
-			};
-
-		};
-
-		$('form').addClass('ahashakeheartache');
-
-		$('form').on('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e){
-			$('form').delay(0).removeClass('ahashakeheartache');
-		});
-
-		$scope.accept = true;
-		$('i').removeClass('fa-spin');
-
-
-	}, function(data){
-			console.log("there was an error!");
+			if(user.isAdmin)
+				$location.path('/students');
+			else
+				$location.path('/exam');
+		}else{
+			$scope.wrongUser = true;
+			$('form').addClass('ahashakeheartache');
+			$('form').on('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e){
+				$('form').delay(0).removeClass('ahashakeheartache');
+			});
+		}
 	});
 
-
-	}, 0);
-
-
+	// palla!
+	//$scope.user = "cristina";
+	//$scope.password = users[$scope.user].password;
 };
 
 
