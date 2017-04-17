@@ -34,9 +34,27 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray) {
 	this.judge = function (exam) {
 		exam.submitted = (new Date()).toJSON();
 
-		exam.passed = exam.questions.every(function (question) {
+		exam.questions.forEach(function (question) {
+			question.rights = [];
+			question.wrongs = [];
+
+			if (question.type === "radio") {
+				question.alternatives.forEach(function (alternative, index) {
+					question.rights.push((question.guess === index && question.guess === question.answers) || (question.guess !== index && question.answers === index));
+					question.wrongs.push(question.guess === index && question.guess !== question.answers);
+				});
+			} else if (question.type === "checkbox") {
+				question.alternatives.forEach(function (alternative, index) {
+					question.rights.push(question.answers[index]);
+					question.wrongs.push(question.guess[index] === true && question.guess[index] !== question.answers[index]);
+				});
+			}
+
 			 question.guessedCorrect = angular.equals(question.answers, question.guess);
-			 return question.guessedCorrect;
+		});
+
+		exam.passed = exam.questions.every(function (question) {
+			return question.guessedCorrect;
 		});
 
 		return exam.passed;
