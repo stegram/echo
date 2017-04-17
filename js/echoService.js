@@ -93,15 +93,13 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray) {
 			var exams = $firebaseArray(ref);
 			var userExams = this.getTakenExams();
 
-			exams.$loaded(function () {
-				userExams.$loaded(function () {
-
-					exams.forEach(function (exam) {
-						exam.attempts = userExams.filter(function (userExam) {
-							return userExam.id === exam.id;
-						}).length;
-					});
-
+			userExams.$watch(function () {
+				exams.$loaded(function () {
+						exams.forEach(function (exam) {
+							exam.attempts = userExams.filter(function (userExam) {
+								return userExam.id === exam.id;
+							}).length;
+						});
 				});
 			});
 
