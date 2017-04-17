@@ -57,7 +57,7 @@
 
 						<!-- <pre>current question: {{question | json}}</pre> -->
 					</div>
-					<button type="button" class="w3-button w3-card w3-teal" ng-click="toggle()"><i class="fa fa-arrow-left"></i> Back</button>
+					<button type="button" class="w3-button w3-card w3-teal" ng-click="toggle(); clearExam()"><i class="fa fa-arrow-left"></i> Back</button>
 					<button type="submit" class="w3-button w3-card w3-teal" ng-disabled="exam.submitted"><i class="fa fa-check-square-o"></i> Submit</button>
 				</form>
 
