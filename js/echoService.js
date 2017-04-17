@@ -1,12 +1,6 @@
 echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $firebaseObject) {
 
 
-
-	//id should prob be user names
-
-
-	//var user = "cristina"; // palla!
-
 	var echoUsers = {
 		'cristina' : {'title' : "bma", 'password' : "hejhej", 'lastlogin' : "2017-03-29",
 			'data' : {}},
