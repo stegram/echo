@@ -24,6 +24,10 @@ echoApp.controller('examCtrl', function ($scope, echo) {
 		$scope.show = !$scope.show;
 	}
 
+	$scope.clearExam = function() {
+		$scope.exams = echo.getAllExams();
+	}
+
 	$scope.exams = echo.getAllExams();
 
 
