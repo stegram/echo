@@ -1,12 +1,8 @@
 echoApp.controller('loginCtrl', function ($scope, $timeout, $location, echo) {
 
 $scope.user = "";
-
 $scope.show = false;
-
 $scope.accept = false;
-var users = echo.getRegisteredUsers();
-
 
 $scope.login = function() {
 	if (!$scope.user)
@@ -36,10 +32,6 @@ $scope.login = function() {
 			});
 		}
 	});
-
-	// palla!
-	//$scope.user = "cristina";
-	//$scope.password = users[$scope.user].password;
 };
 
 
