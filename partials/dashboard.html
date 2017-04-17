@@ -13,7 +13,7 @@
 	  <i ng-if="user.isAdmin" class="fa fa-user-md" style="font-size:70px;color:teal;"></i>
     </div>
     <div class="w3-col s8 w3-bar">
-      <span>{{user.title}}, <strong>{{user.name}}</strong></span>
+      <span><strong>{{user.name}}</strong></span>
 	  <br>
 	  Last login: {{user.lastlogin}}
     </div>
@@ -27,7 +27,6 @@
 
 	<a href="#/home" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i> Home</a>
     <a href="#/simulator" class="w3-bar-item w3-button w3-padding"> <i class="fa fa-heartbeat fa-fw"></i> Simulator</a>
-    <a href="#/excercise" class="w3-bar-item w3-button w3-padding"> <i class="fa fa-cogs fa-fw"></i> Excercises</a>
     <a href="#/exam" class="w3-bar-item w3-button w3-padding"> <i class="fa fa-graduation-cap fa-fw"></i> Exam</a>
   	<a href="#/about" class="w3-bar-item w3-button w3-padding"> <i class="fa fa-comment fa-fw"></i> About</a><br><br>
     <a href="#/login" class="w3-bar-item w3-button w3-padding" ng-click="logout()"> <i class="fa fa-power-off fa-fw"></i> Logoff</a>

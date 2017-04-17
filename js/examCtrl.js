@@ -33,14 +33,7 @@ echoApp.controller('examCtrl', function ($scope, echo) {
 
 
 	<!-- SKRÄP -->
-	$scope.exercise;
-	$scope.answer;
-	$scope.setExercise = function(exer){
-		$scope.exercise = exer;
-	};
-
-	$scope.exercises = echo.getExercises();
-
+	
 	$scope.submit = function(){
 		var result = echo.judge($scope.exam);
 		echo.saveTakenExam($scope.exam);

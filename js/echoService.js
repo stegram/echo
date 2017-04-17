@@ -43,6 +43,7 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 		var loggedUser = this.getUser();
 		loggedUser.first = false;
 		loggedUser.name = loggedUser.$id;
+		loggedUser.lastlogin = this.getCurrentDate();
 		return loggedUser;
 	};
 
@@ -122,17 +123,6 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 		userExams.$add(exam);
 	}
 
-
-	this.getExercises = function(){
-		return [
-			{"id":"1", "text":"...................", "type":"radio",
-				"alt":["wrong1", "wrong2", "wrong3", "correct"], "answer":"correct", "img":"images/chamber.gif"},
-			{"id":"2", "text":".....................", "type":"checkbox",
-				"alt":["wrong1", "sant1", "wrong2", "sant2"], "answer":["correct1", "correct2"], "img":"images/chamber.gif"},
-			{"id":"3", "text":".................", "type":"text", "alt":[], "answer":"correct", "img":"images/ds.jpg"},
-			{"id":"4", "text":"....................", "type":"text", "alt":[], "answer":"correct", "img":"images/ds.jpg"}
-		];
-	};
 
 	this.getExam = function(){
 
