@@ -1,4 +1,4 @@
-echoApp.controller('examCtrl', function ($scope, echo) {
+echoApp.controller('examCtrl', function ($scope, $firebaseArray, echo) {
 
 	$scope.show = true;
 	$scope.exam;
@@ -24,10 +24,8 @@ echoApp.controller('examCtrl', function ($scope, echo) {
 		$scope.show = !$scope.show;
 	}
 
-	$scope.exams = echo.getAllExams().results;
-
-
-
+	var ref = firebase.database().ref().child("exams");
+	$scope.exams = $firebaseArray(ref);
 
 
 
@@ -42,6 +40,7 @@ echoApp.controller('examCtrl', function ($scope, echo) {
 
 	$scope.submit = function(){
 		var result = echo.judge($scope.exam);
+		// Doesn't work: $scope.exams.$save();
 		alert(result ? "YAY!" : "nej :(");
 	}
 
