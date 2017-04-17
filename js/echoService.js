@@ -1,7 +1,5 @@
 echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $firebaseObject) {
 
-
-
 	//id should prob be user names
 
 
@@ -42,9 +40,9 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 	};
 
 	this.getLoginUser = function(){
-		var loggedUser = echoUsers[user];
+		var loggedUser = this.getUser();
 		loggedUser.first = false;
-		loggedUser.name = user;
+		loggedUser.name = loggedUser.$id;
 		return loggedUser;
 	};
 
@@ -68,37 +66,19 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 		return date;
 	};
 
-
-	var user = "cristina"; // palla!
-
-	var echoUsers = {
-		'cristina' : {'title' : "bma", 'password' : "hejhej", 'lastlogin' : "2017-03-29",
-			'data' : {}},
-		'admin' : {'title' : "admin", 'password' : "null", 'lastlogin' : "2017-03-29",
-			'data' : {}}
-	};
-
-	this.getRegisteredUsers = function(){
-		return echoUsers;
-	};
+	var currentUser = {};
 
 	this.checkUser = function(username){
 		var ref = firebase.database().ref().child('users').child(username);
 		return $firebaseObject(ref);
 	}
 
-	this.setUser = function(name){
-		user = name;
+	this.setUser = function(user){
+		currentUser = user;
 	};
 
 	this.getUser = function(){
-
-		var loggedUser = echoUsers[user];
-
-		loggedUser.name = user;
-
-		return loggedUser;
-
+		return currentUser;
 	};
 
 	this.judge = function (exam) {
@@ -132,7 +112,7 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 
 	this.getTakenExams = function () {
 		// Get all the users taken exams
-		var ref = firebase.database().ref().child("users").child(this.getUser().name).child("exams");
+		var ref = firebase.database().ref().child("users").child(this.getUser().$id).child("exams");
 		return $firebaseArray(ref);
 	}
 

@@ -18,7 +18,7 @@ $scope.login = function() {
 		$scope.loading = false;
 
 		if(exists){
-			echo.setUser(user.$id);
+			echo.setUser(user);
 
 			if(user.isAdmin)
 				$location.path('/students');
