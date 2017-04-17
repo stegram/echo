@@ -43,13 +43,13 @@
 					<div class="form-group" ng-repeat="question in exam.questions">
 						{{question.text}}
 
-						<div ng-repeat="(index, alternative) in question.alternatives"><!-- || (question.guess !== index && question.answers === index) -->
-							<label ng-if="question.type === 'radio'" ng-class="{right: (question.guess === index && question.guess === question.answers), wrong: question.guess === index && question.guess !== question.answers}">
+						<div ng-repeat="(index, alternative) in question.alternatives">
+							<label ng-if="question.type === 'radio'" ng-class="{right: question.rights[index], wrong: question.wrongs[index]}">
 								<input type="radio" ng-value="index" ng-model="question.guess" ng-disabled="exam.submitted"/>
 								{{alternative}}
 							</label>
 
-							<label ng-if="question.type === 'checkbox'" ng-class="{right: question.guess[index] === true && question.guess[index] === question.answers[index], wrong: question.guess[index] === true && question.guess[index] !== question.answers[index]}">
+							<label ng-if="question.type === 'checkbox'" ng-class="{right: question.rights[index], wrong: question.wrongs[index]}">
 								<input type="checkbox" ng-value="alternative" ng-model="question.guess[index]" ng-disabled="exam.submitted"/>
 								{{alternative}}
 							</label>
@@ -58,7 +58,7 @@
 						<!-- <pre>current question: {{question | json}}</pre> -->
 					</div>
 					<button type="button" class="w3-button w3-card w3-teal" ng-click="toggle()"><i class="fa fa-arrow-left"></i> Back</button>
-					<button type="submit" class="w3-button w3-card w3-teal" ng-click="toggle()" ng-disabled="exam.submitted"><i class="fa fa-check-square-o"></i> Submit</button>
+					<button type="submit" class="w3-button w3-card w3-teal" ng-disabled="exam.submitted"><i class="fa fa-check-square-o"></i> Submit</button>
 				</form>
 
 			</div>
