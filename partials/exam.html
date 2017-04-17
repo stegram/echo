@@ -13,7 +13,7 @@
 
 		<ul class="w3-ul w3-hoverable w3-card-4 w3-teal w3-animate-right" ng-show="show">
 			<li class="w3-hover-white" ng-repeat="exam in exams" ng-click="setExam(exam); setI($index); toggle()">
-				<i class="fa fa-pencil"></i> Exam {{ $index + 1}}<span class="w3-right">0 attempts</span>
+				<i class="fa fa-pencil"></i> Exam {{ $index + 1}}<span class="w3-right">{{exam.attempts}} attempts</span>
 			</li>
 		</ul>
 
