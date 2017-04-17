@@ -4,14 +4,14 @@
 
 	<table style="width:100%" class="form-signin-heading">
 	  <tr>
-		<th><img class="w3-card" src="/echo/images/ds.png" width="110" height="90"></th> 
+		<th><img class="w3-card" src="images/ds.png" width="110" height="90"></th>
 		<th><h2>Login</h2></th>
 	  </tr>
 	</table>
 
-	<input name="user" type="text" class="form-control" placeholder="name" ng-model="user"/>
-	<input name="password" type="password" class="form-control" placeholder="Password" ng-model="password"/>
-	
+	<input name="user" type="text" value="cristina" class="form-control" placeholder="name" ng-model="user"/>
+	<input name="password" type="password" value="hejhej" class="form-control" placeholder="Password" ng-model="password"/>
+
 	<!--<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>-->
 	<button type="submit" class="w3-button w3-card w3-teal w3-block"><i class="fa fa-cog fa-lg"></i> Login</button>
 	<div ng-if="accept"><center class="w3-text-red">wrong password or username</center></div>

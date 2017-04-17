@@ -1,6 +1,6 @@
 body {
   background: #eee !important;
-  
+
   transition: background-color 1s linear;
 }
 
@@ -84,3 +84,26 @@ form {
 		80% { -o-transform: translate(8px); }
 		100% { -o-origin-transform: translate(0px); }
 	}
+
+/*
+table {
+    border-collapse: collapse;
+	width: 70%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}*/
+
+.rs-exam .ng-submitted .right {
+  color: #bada55;
+}
+.rs-exam .ng-submitted .wrong {
+  color: #d11d05;
+}

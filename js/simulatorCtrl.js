@@ -33,7 +33,7 @@ var barMonthConfig = {
 			}
 		}
 	};
-	
+
 var errorConfig = {
 		type: 'line',
 		data: {
@@ -55,7 +55,7 @@ var errorConfig = {
 			}
 		}
 	};
-	
+
 var barMonth = document.getElementById("barChartMonth");
 
 var line = document.getElementById("lineChart");
@@ -64,30 +64,30 @@ var barMonthChart = new Chart(barMonth, barMonthConfig);
 
 var lineChart = new Chart(line, errorConfig);
 
-$scope.getSessions = function(){ 
+$scope.getSessions = function(){
 
 	$scope.loading = "loading...";
-	
+
 	echo.loggedSessions.get({name:user.name}, function(data){
-			
+
 			$scope.loading = "";
-			
+
 			$scope.sessions = $.map(data, function(value, index) {
-				if(typeof value == 'object') 
+				if(typeof value == 'object')
 					return [value];
 			});;
-			
+
 			var i = 1;
-			
+
 			for(x in $scope.sessions){
 
 				if($scope.sessions[x].date != undefined){
-				
+
 					relError.push(Math.abs(parseInt($scope.sessions[x].your) - parseInt($scope.sessions[x].correct))/parseInt($scope.sessions[x].correct)*100);
-				
+
 					labelError.push(i);
 					i++;
-				
+
 					if($scope.sessions[x].date.charAt(5) == "0"){
 						sessionsPerMonth[parseInt($scope.sessions[x].date.charAt(6))] += 1;
 					}else{
@@ -97,26 +97,26 @@ $scope.getSessions = function(){
 				};
 
 			};
-			
+
 			lineChart.data.labels = labelError;
-			
+
 			lineChart.data.datasets[0].data = relError;
-			
+
 			lineChart.update();
-			
-			
+
+
 			barMonthChart.data.datasets[0].data = sessionsPerMonth;
-			
+
 			barMonthChart.update()
-			
+
 			relError = [];
 			labelError = [];
 			sessionsPerMonth = [0,0,0,0,0,0,0,0,0,0,0,0];
-			
+
 	}, function(data){
 			alert("There was an error!");
 	});
-	
+
 };
 
 $scope.getSessions();
@@ -125,11 +125,11 @@ $scope.logangle = function(your, correct){
 	$scope.post = "posting...";
 	if(user != undefined){
 		echo.angles.log({name:user.name}, {date:echo.getCurrentDate(), your:your, correct:correct}, function(){
-			
+
 			$scope.post = "";
 			$scope.getSessions();
 		});
-		
+
 	};
 
 };
