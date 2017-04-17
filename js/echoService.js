@@ -34,10 +34,12 @@ echoApp.factory('echo',function ($resource, $cookieStore) {
 	this.judge = function (exam) {
 		exam.submitted = new Date();
 
-		return exam.questions.every(function (question) {
+		exam.passed = exam.questions.every(function (question) {
 			 question.guessedCorrect = angular.equals(question.answers, question.guess);
 			 return question.guessedCorrect;
 		});
+
+		return exam.passed;
 	}
 
 
