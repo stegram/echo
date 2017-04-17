@@ -125,10 +125,15 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray) {
 		return exam.passed;
 	}
 
+	this.getTakenExams = function () {
+		// Get all the users taken exams
+		var ref = firebase.database().ref().child("users").child(this.getUser().name).child("exams");
+		return $firebaseArray(ref);
+	}
+
 	this.saveTakenExam = function (exam) {
 		// Save the whole exam under the users exams
-		var ref = firebase.database().ref().child("users").child(this.getUser().name).child("exams");
-		var userExams = $firebaseArray(ref);
+		var userExams = this.getTakenExams();
 		userExams.$add(exam);
 	}
 
@@ -150,7 +155,22 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray) {
 
 	this.getAllExams = function(){
 			var ref = firebase.database().ref().child("exams");
-			return $firebaseArray(ref);
+			var exams = $firebaseArray(ref);
+			var userExams = this.getTakenExams();
+
+			exams.$loaded(function () {
+				userExams.$loaded(function () {
+
+					exams.forEach(function (exam) {
+						exam.attempts = userExams.filter(function (userExam) {
+							return userExam.id === exam.id;
+						}).length;
+					});
+
+				});
+			});
+
+			return exams;
 	};
 
 	var getImage = {
