@@ -40,7 +40,12 @@ echoApp.controller('examCtrl', function ($scope, $firebaseArray, echo) {
 
 	$scope.submit = function(){
 		var result = echo.judge($scope.exam);
-		// Doesn't work: $scope.exams.$save();
+
+		// Save the whole exam under the users exams
+		var ref = firebase.database().ref().child("users").child(echo.getUser().name).child("exams");
+		var userExams = $firebaseArray(ref);
+		userExams.$add($scope.exam);
+
 		alert(result ? "YAY!" : "nej :(");
 	}
 
