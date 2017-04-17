@@ -1,22 +1,27 @@
-echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray) {
+echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $firebaseObject) {
 
 
 
 	//id should prob be user names
 
 
-	var user = "cristina"; // palla!
+	//var user = "cristina"; // palla!
 
 	var echoUsers = {
 		'cristina' : {'title' : "bma", 'password' : "hejhej", 'lastlogin' : "2017-03-29",
 			'data' : {}},
-		'robin' : {'title' : "admin", 'password' : "null", 'lastlogin' : "2017-03-29",
+		'admin' : {'title' : "admin", 'password' : "null", 'lastlogin' : "2017-03-29",
 			'data' : {}}
 	};
 
 	this.getRegisteredUsers = function(){
 		return echoUsers;
 	};
+
+	this.checkUser = function(username){
+		var ref = firebase.database().ref().child('users').child(username);
+		return $firebaseObject(ref);
+	}
 
 	this.setUser = function(name){
 		user = name;
