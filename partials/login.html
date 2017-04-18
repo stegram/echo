@@ -9,11 +9,13 @@
 	  </tr>
 	</table>
 
-	<input name="user" type="text" value="cristina" class="form-control" placeholder="name" ng-model="user"/>
+	<input name="user" type="text" class="form-control" placeholder="name" ng-model="user"/>
 
 	<!--<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>-->
-	<button type="submit" class="w3-button w3-card w3-teal w3-block"><i class="fa fa-cog fa-lg" ng-class="{ 'fa-spin': loading }"></i> Login</button>
+	<button type="submit" class="w3-button w3-card w3-teal w3-block"><i class="fa fa-spinner fa-lg" ng-class="{ 'fa-spin': loading }"></i> Login</button>
 	<div ng-show="wrongUser"><center class="w3-text-red">Wrong username.</center></div>
 </form>
+
+<!-- <pre>{{user | json}}</pre> -->
 
 </div>
