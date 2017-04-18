@@ -1,38 +1,41 @@
-echoApp.controller('loginCtrl', function ($scope, $timeout,$location, echo) {
+echoApp.controller('loginCtrl', function ($scope,$location, echo) {
 
 $scope.user = "";
 $scope.password = "";
 
-$scope.show = false;
+//$scope.show = false;
 
 $scope.accept = false;
-var users = echo.getRegisteredUsers();
 
 $scope.login = function() {
 	$('i').addClass('fa-spin');
 	
-	$timeout(function(){
+	echo.registeredUsers.get({},function(users){
+
 		for(name in users){
+
 			if(name == $scope.user){
+
 				if(users[name].password == $scope.password){
 					
 					$scope.accept = false;
-					echo.setUser(name);
+					
+					echo.setLoginUser(users[name]);
 					
 					$('form').removeClass('ahashakeheartache');
 					
 					if(users[name].title == "admin"){
 						$location.path('/students');
 					}else{
-						$location.path('/questions');
+						$location.path('/home');
 					};
 
 					return;
 				};
 			};
-			
+				
 		};
-
+		
 		$('form').addClass('ahashakeheartache');
 		
 		$('form').on('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e){
@@ -41,7 +44,10 @@ $scope.login = function() {
 		
 		$scope.accept = true;
 		$('i').removeClass('fa-spin');
-	}, 2000);
+		
+	}, function(data){
+			console.log("there was an error!");
+	});
 	
 };
 

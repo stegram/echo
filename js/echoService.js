@@ -2,30 +2,64 @@ echoApp.factory('echo',function ($resource, $cookieStore) {
 	
 	//id should prob be user names
 	
-	var user = "";
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+
+	if(dd<10) {
+		dd='0'+dd
+	} 
+
+	if(mm<10) {
+		mm='0'+mm
+	}
 	
-	var echoUsers = {
-		'cristina' : {'title' : "bma", 'password' : "hejhej", 'lastlogin' : "2017-03-29",
-			'data' : {}},
-		'robin' : {'title' : "admin", 'password' : "null", 'lastlogin' : "2017-03-29",
-			'data' : {}}
+	var date = yyyy + '-' + mm + '-' + dd;
+	
+	var user = {};
+	var sessions = {};
+	
+	this.registeredUsers = $resource('https://test-fcf8a.firebaseio.com/users/.json');
+	
+	this.loggedSessions = $resource('https://test-fcf8a.firebaseio.com/data/:name/simulator/.json');
+	
+	this.firstQuestions = $resource('https://test-fcf8a.firebaseio.com/data/:name/firstQuestions/.json');
+	
+	this.getSessions = function(){
+		return sessions;
 	};
 	
-	this.getRegisteredUsers = function(){
-		return echoUsers;
+	this.saveSessions = function(set){
+		sessions = set;
 	};
 	
-	this.setUser = function(name){
-		user = name;
+	this.setLoginUser = function(selected){
+		user = selected;
 	};
 	
-	this.getUser = function(){
-		
-		var loggedUser = echoUsers[user];
-		
-		loggedUser.name = user;
-		
-		return loggedUser;
+	this.getLoginUser = function(){		
+		return user;
+	};
+	
+	this.lastLogin = $resource('https://test-fcf8a.firebaseio.com/users/:name/.json',{},{
+		update: {method: 'PATCH'}
+	});
+	
+	this.angles = $resource('https://test-fcf8a.firebaseio.com/data/:name/simulator/.json',{},{
+		log: {method: 'POST'}
+	});
+	
+	this.firstSubmit = $resource('https://test-fcf8a.firebaseio.com/data/:name/firstQuestions/.json',{},{
+		submit: {method: 'PATCH'}
+	});
+	
+	this.updateUser = $resource('https://test-fcf8a.firebaseio.com/users/:name/.json',{},{
+		update: {method: 'PATCH'}
+	});
+	
+	this.getCurrentDate = function(){
+		return date;
 	};
 
 

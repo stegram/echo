@@ -45,9 +45,9 @@ echoApp.config(['$routeProvider',
         templateUrl: 'partials/dashboard.html',
         controller: 'dashboardCtrl'
       }).
-	  when('/questions', {
-        templateUrl: 'partials/questions.html',
-        //controller: 'userCtrl'
+	  when('/home', {
+        templateUrl: 'partials/home.html',
+        controller: 'homeCtrl'
       }).
 	  when('/about', {
         templateUrl: 'partials/about.html',

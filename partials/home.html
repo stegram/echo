@@ -1,0 +1,72 @@
+<ng-include src="'partials/dashboard.html'" ng-controller="dashboardCtrl"></ng-include>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+
+	  <!-- Modal content-->
+	  <div class="modal-content">
+	  
+		<div class="modal-header w3-teal">
+		  <h4 class="modal-title">First Time Questions</h4>
+		</div>
+		
+		<div class="modal-body">
+		  
+			<div class="w3-cell-row w3-margin-bottom">
+				<i class="fa fa-user-md w3-cell w3-margin" style="font-size:70px;color:teal;"></i>
+				<div class="w3-cell w3-cell-middle">Please answer the following questions before you start.</div>
+			</div>
+		  
+			<form ng-submit="sendForm(profession,year,month)">
+		
+				<div class="w3-cell">
+					<p class="question">1. What is you profession?</p>
+					<input type="text" ng-model="profession" class="form-control" required>
+				</div>
+				<br>
+				<div class="w3-cell">
+					<p class="question">2. How long have you been working with echochardiography?</p>
+					<span>Years:</span> <input type="number" ng-model="year" class="form-control" required>
+					<span>Months:</span> <input type="number" ng-model="month" class="form-control" required>
+				</div>
+				
+				{{post}}<button type="submit" class="btn btn-default w3-teal">Submit</button>
+			
+			</form>
+		</div>
+		
+		<!--
+		<div class="modal-footer">
+		  
+		</div>-->
+	  
+	  </div>
+	  
+	</div>
+</div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-white w3-card w3-animate-right" style="margin-left:312px;margin-top:118px;">
+
+	<div class="w3-panel w3-teal">
+		<h1><i class="fa fa-home"></i> Home</h1>
+	</div> 
+
+	<p class="w3-margin">Welcome! We are glad that you are participating in this study.</p>
+	<br>
+	<br>
+	<div class="w3-margin">
+		<h3 class="w3-text-teal">Your Profile</h3>
+		<hr>
+		{{loading}}
+		<h4 class="w3-text-teal">Profession: {{profession}}</h4>
+		<br>
+		<h4 class="w3-text-teal">Years working: {{year}}</h4>
+		<br>
+		<h4 class="w3-text-teal">Months working: {{month}}</h4>
+		<br>
+	</div>
+	
+<!-- End page content -->
+</div>

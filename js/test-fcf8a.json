@@ -1,0 +1,18 @@
+{
+"users" : {
+	"cristina" : {"lastlogin" : "2017-04-03", "title" : "bma", "password" : "hejhej"},
+	"reidar" : {"lastlogin" : "2017-04-03", "title" : "admin", "password" : "admin"}
+	},
+"data" : {
+	"cristina" : {
+		"questions" : {
+			"data" : "bla"
+		},
+		"simulator" : {
+			"data" : "bla"
+		},
+		"excercises" : {
+			"data" : "bla"
+		}
+	}
+}

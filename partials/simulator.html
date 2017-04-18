@@ -4,80 +4,107 @@
 <div class="w3-main w3-white w3-card w3-animate-right" style="margin-left:312px;margin-top:118px;">
 
 	<div class="w3-panel w3-teal">
-		<h1>Simulator</h1>
+		<h1><i class="fa fa-heartbeat"></i> Simulator</h1>
 	</div> 
 
-<div class="w3-margin">
-
-<div class="w3-row">
-	<i class="fa fa-heartbeat w3-margin w3-cell" style="font-size:70px;color:teal;"></i>	
-</div>
-
-<div class="w3-bar w3-card w3-teal">
-	<div class="w3-bar">
-		<button class="w3-bar-item w3-button" ng-click="showOverview = true; showSessions = false; showLog = false"><i class="fa fa-area-chart"></i> Overview</button>
-		<button class="w3-bar-item w3-button" ng-click="showOverview = false; showSessions = true; showLog = false"><i class="fa fa-desktop"></i> Sessions</button>
-		<button class="w3-bar-item w3-button" ng-click="showOverview = false; showSessions = false; showLog = true"><i class="fa fa-pencil-square-o"></i> Log Session</button>
-	</div>
-</div>	
-
-<div class="w3-row w3-card w3-margin-bottom w3-animate-right" ng-show="showOverview">
-
-	<h4 class="w3-text-teal"><i class="fa fa-area-chart w3-margin" style="font-size:20px;color:teal;"></i> Overview</h4>
-
-	<div class="w3-half">
-		<div class="w3-container w3-padding-16">
-		  <canvas id="barChart"></canvas>
-		</div>
-    </div>
-	
-	<div class="w3-half">
-		<div class="w3-container w3-padding-16">
-		  <canvas id="lineChart"></canvas>
-		</div>
-    </div>
-	
-</div>
-
-<div class="w3-bar w3-card w3-animate-right" ng-show="showSessions">
-	<h4 class="w3-text-teal"><i class="fa fa-desktop w3-margin" style="font-size:20px;color:teal;"></i> Sessions</h4>
-	
-	<table class="w3-table w3-striped w3-centered">
-		<tr>
-			<th>Log date</th>
-			<th>your angle</th>
-			<th>correct angle</th>
-		</tr>
-		<tr ng-repeat="x in [1,2,3,4,5]">
-			<td>{{ x }}</td>
-			<td>{{ x }}</td>
-			<td>{{ x }}</td>
-			<!--<td>{{ x.Country }}</td>-->
-		</tr>
-	</table>
-	
-</div>
-
-<div class="w3-row w3-card w3-margin-bottom w3-animate-right" ng-show="showLog">
-	<h4 class="w3-text-teal"><i class="fa fa-pencil-square-o w3-margin" style="font-size:20px;color:teal;"></i> Log Session</h4>
-	
-	<form class="w3-container w3-margin">
-		<p>
-			<input class="w3-input" type="text" ng-model="angle">
-			<label>Your Angle</label> 
-		</p>
+	<div class="w3-margin">
 		
-		<p>
-			<input class="w3-input" type="text" ng-model="correct">
-			<label>Correct Angle</label> 
-		</p>
+		<!--
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" data-target="#overview" href="" ng-click="getSessions()"><i class="fa fa-area-chart"></i> Overview</a></li>
+			<li><a data-toggle="tab" data-target="#sessions" href=""><i class="fa fa-desktop"></i> Sessions</a></li>
+		</ul>-->
+
+		<div class="w3-card">
 		
-		<button class="w3-button w3-card w3-teal"><i class="fa fa-cog"></i> Log</button>
-	</form>
-</div>
+			<div class="w3-bar w3-teal">
+				<button class="w3-bar-item w3-button w3-mobile" ng-click="showOverview = true; showSessions = false"><i class="fa fa-area-chart"></i> Overview</button>
+				<button class="w3-bar-item w3-button w3-mobile" ng-click="showOverview = false; showSessions = true"><i class="fa fa-desktop"></i> Sessions</button>
+				<button class="w3-bar-item w3-button w3-mobile"><i class="fa fa-youtube"></i> Learn</button>
+			</div>
+		   
+		   <div ng-show="showOverview">
+				<br>
+				<ul class="nav nav-tabs">
+					<li class="active"><a data-toggle="tab" data-target="#freq" href=""><i class="fa fa-bar-chart"></i> Freq</a></li>
+					<li><a data-toggle="tab" data-target="#error" href=""><i class="fa fa-line-chart"></i> Error</a></li>
+				</ul>
 
-<br><br>
+				<div class="tab-content">
+				   
+					<div id="freq" class="tab-pane fade in active">
+						<div class="w3-container w3-padding-16">
+						  <canvas id="barChartMonth"></canvas>
+						</div>
+					</div>
+					
+					<div id="error" class="tab-pane fade">
+						<div class="w3-container w3-padding-16">
+							<canvas id="lineChart"></canvas>
+						</div>
+					</div>
 
-</div>	
+				</div>
+				
+			</div>
+			
+			
+			<div ng-show="showSessions">
+				<br>
+				<ul class="nav nav-tabs">
+					<li class="active"><a data-toggle="tab" data-target="#logbok" href=""><i class="fa fa-book"></i> Logbok</a></li>
+					<li><a data-toggle="tab" data-target="#log" href=""><i class="fa fa-pencil-square-o"></i> Log Session</a></li>
+				</ul>
+				
+				<div class="tab-content">
+				
+					<div id="logbok" class="tab-pane fade in active">
+						<span><i class="fa fa-search w3-margin"></i></span><input type="text" placeholder="search" ng-model="search"/>
+					
+						
+							<table class="w3-table w3-striped w3-centered">
+								
+								<tr>
+									<th>Log Date</th>
+									<th>Your Angle</th>
+									<th>Correct Angle</th>
+								</tr>
+								{{loading}}
+								
+								<tr ng-repeat="x in sessions | filter:search">
+									<td>{{ x.date }}</td>
+									<td>{{ x.your }}</td>
+									<td>{{ x.correct }}</td>
+								</tr>
+								
+							</table>
+					</div>
+				
+					<div id="log" class="tab-pane fade">
+
+						<form class="w3-container w3-margin">
+							<p>
+								<input class="w3-input" type="number" ng-model="angle">
+								<label>Your Angle</label> 
+							</p>
+							
+							<p>
+								<input class="w3-input" type="number" ng-model="correct">
+								<label>Correct Angle</label>
+							</p>
+							{{post}}
+							<button class="w3-button w3-card w3-teal" ng-click="logangle(angle,correct)"><i class="fa fa-cog"></i> Log</button>
+						</form>
+					
+					</div>
+				
+				</div>
+
+			</div>
+		 
+		<br><br>
+
+		</div>
+	</div>		
 <!-- End page content -->
 </div>
