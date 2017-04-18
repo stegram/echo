@@ -28,7 +28,7 @@ $scope.login = function() {
 			$scope.wrongUser = true;
 			$('form').addClass('ahashakeheartache');
 			$('form').on('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e){
-				$('form').delay(0).removeClass('ahashakeheartache');
+				$('form').removeClass('ahashakeheartache');
 			});
 		}
 	});

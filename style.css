@@ -101,9 +101,9 @@ tr:nth-child(even) {
     background-color: #dddddd;
 }*/
 
-.rs-exam .ng-submitted .right {
+.rs-exam .right {
   color: #bada55;
 }
-.rs-exam .ng-submitted .wrong {
+.rs-exam .wrong {
   color: #d11d05;
 }

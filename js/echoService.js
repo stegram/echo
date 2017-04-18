@@ -149,7 +149,17 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 	var getImage = {
 	};
 
+	this.getAllUsers = function(){
+		var ref = firebase.database().ref().child("users");
+		return $firebaseArray(ref);
+	}
 
+	this.addUser= function (user) {
+		var ref = firebase.database().ref().child("users");
+		var obj = $firebaseObject(ref);
+		ref.child(user).set("null");
+
+	}
 
   return this;
 
