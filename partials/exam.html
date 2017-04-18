@@ -3,21 +3,21 @@
 <!-- !PAGE CONTENT! -->
 <div class="rs-exam w3-main w3-white w3-card w3-animate-right" style="margin-left:312px;margin-top:118px;">
 
-	<div class="w3-panel w3-teal" ng-show="show">
+	<div class="w3-panel w3-teal" ng-show="showExamList">
 		<h1>Exam</h1>
 	</div>
 
 	<div class="w3-margin">
-		<i class="fa fa-graduation-cap w3-margin" style="font-size:70px;color:teal;" ng-show="show"></i>
+		<i class="fa fa-graduation-cap w3-margin" style="font-size:70px;color:teal;" ng-show="showExamList"></i>
 		<br>
 
-		<ul class="w3-ul w3-hoverable w3-card-4 w3-teal w3-animate-right" ng-show="show">
-			<li class="w3-hover-white" ng-repeat="exam in exams" ng-click="setExam(exam); setI($index); toggle()">
-				<i class="fa fa-pencil"></i> Exam {{ $index + 1}}<span class="w3-right">{{exam.attempts}} attempts</span>
+		<ul class="w3-ul w3-hoverable w3-card-4 w3-teal w3-animate-right" ng-show="showExamList">
+			<li class="w3-hover-white" ng-repeat="exam in exams" ng-click="setExam(exam); setI($index); toggleExamList()">
+				<i class="fa fa-pencil"></i> Exam {{ $index + 1}}<span class="w3-right" ng-hide="showOldExams">{{exam.attempts}} attempts</span>
 			</li>
 		</ul>
 
-		<div class="w3-bar w3-card w3-animate-right" ng-hide="show" ng-repeat="exam in exams" >
+		<div class="w3-bar w3-card w3-animate-right" ng-hide="showExamList" ng-repeat="exam in exams" >
 
 			<div class="w3-margin" ng-show="$index == getI()" >
 
@@ -57,14 +57,21 @@
 
 						<!-- <pre>current question: {{question | json}}</pre> -->
 					</div>
-					<button type="button" class="w3-button w3-card w3-teal" ng-click="toggle(); clearExam()"><i class="fa fa-arrow-left"></i> Back</button>
+					<button type="button" class="w3-button w3-card w3-teal" ng-click="toggleExamList(); getExams()"><i class="fa fa-arrow-left"></i> Back</button>
 					<button type="submit" class="w3-button w3-card w3-teal" ng-disabled="exam.submitted"><i class="fa fa-check-square-o"></i> Submit</button>
 				</form>
 
 			</div>
 
+
 		</div>
 
+
+		<br>
+		<div>
+			<button class="w3-button w3-card w3-teal" ng-click="toggleOldExams(); getExams()" ng-show="showExamList && !showOldExams"><i class=""></i> See old exams</button>
+			<button class="w3-button w3-card w3-teal" ng-click="toggleOldExams(); getExams()" ng-show="showExamList && showOldExams"><i class="fa fa-arrow-left"></i> Back</button>
+		</div>
 		<br>
 	</div>
 </div>
