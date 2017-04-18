@@ -1,14 +1,38 @@
-echoApp.controller('studentsCtrl', function ($scope) {
+echoApp.controller('studentsCtrl', function ($scope, echo) {
+$scope.user = {};
+$scope.showAllUsers = true;
+$scope.showUser = false;
 
-$scope.student = 1;
-$scope.show = false;
-
-$scope.setStudent = function(x){
-	$scope.student = x;
+$scope.setUser = function(user){
+	$scope.user = user;
 };
 
-$scope.setShow = function(s){
-	$scope.show = s;
+$scope.toggleAllUsers = function(){
+	$scope.showAllUsers = !$scope.showAllUsers;
+};
+
+$scope.toggleUser = function(){
+	$scope.showUser  = !$scope.showUser;
+};
+
+$scope.allUsers = echo.getAllUsers();
+
+$scope.newUser = "";
+$scope.userExists = true;
+
+
+$scope.submit = function() {
+	if (!$scope.newUser)
+		return;
+
+	$scope.allUsers.forEach(function (user) {
+		if (user.$id === $scope.newUser){
+			return;
+		}
+	});
+
+	echo.addUser($scope.newUser);
+	//$scope.allUsers.$add($scope.newUser);
 };
 
 });
