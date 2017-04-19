@@ -41,9 +41,8 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 
 	this.getLoginUser = function(){
 		var loggedUser = this.getUser();
-		loggedUser.first = false;
 		loggedUser.name = loggedUser.$id;
-		loggedUser.lastlogin = this.getCurrentDate();
+		//loggedUser.lastlogin = this.getCurrentDate();
 		return loggedUser;
 	};
 
@@ -67,12 +66,24 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 		return date;
 	};
 
+
+
+
+
+	/* ---------------------------------------------------------------------------*/
+
+
+
 	var currentUser = {};
+
+	this.setLastLogin = function() {
+		currentUser.lastlogin = this.getCurrentDate();
+	};
 
 	this.checkUser = function(username){
 		var ref = firebase.database().ref().child('users').child(username);
 		return $firebaseObject(ref);
-	}
+	};
 
 	this.setUser = function(user){
 		currentUser = user;
@@ -99,7 +110,7 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 					question.rights.push(question.answers[index]);
 					question.wrongs.push(question.guess[index] === true && question.guess[index] !== question.answers[index]);
 				});
-			}
+			};
 
 			 question.guessedCorrect = angular.equals(question.answers, question.guess);
 		});
@@ -109,19 +120,19 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 		});
 
 		return exam.passed;
-	}
+	};
 
 	this.getTakenExams = function () {
 		// Get all the users taken exams
 		var ref = firebase.database().ref().child("users").child(this.getUser().$id).child("exams");
 		return $firebaseArray(ref);
-	}
+	};
 
 	this.saveTakenExam = function (exam) {
 		// Save the whole exam under the users exams
 		var userExams = this.getTakenExams();
 		userExams.$add(exam);
-	}
+	};
 
 
 	this.getExam = function(){
@@ -152,18 +163,23 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 	this.getAllUsers = function(){
 		var ref = firebase.database().ref().child("users");
 		return $firebaseArray(ref);
-	}
+	};
 
 	this.addUser= function (user) {
 		var ref = firebase.database().ref().child("users");
 		//var obj = $firebaseObject(ref);
-		ref.child(user).set("null");
-	}
+		ref.child(user).set({"first": true});
+	};
 
-	this.removeUser= function (user) {
+	this.removeUser = function (user) {
 		var ref = firebase.database().ref().child("users");
 		ref.child(user).remove();
-	}
+	};
+
+	this.setFirst = function(bool){
+		var ref = firebase.database().ref().child("users");
+		ref.child(this.getUser().$id).set({"first": bool});
+	};
 
   return this;
 

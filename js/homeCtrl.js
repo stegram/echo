@@ -27,6 +27,9 @@ $scope.sendForm = function(profession,year,month){
 
 			echo.updateUser.update({name:user.name},{first:user.first});
 
+			// Set first in other databse (user and exam database)
+			echo.setFirst(false);
+
 			$scope.post = "succesful!";
 			getForm();
 			$("#myModal").modal("hide");
