@@ -30,7 +30,7 @@
 					<span>Years:</span> <input type="number" ng-model="year" class="form-control" required>
 					<span>Months:</span> <input type="number" ng-model="month" class="form-control" required>
 				</div>
-				
+				<br>
 				<button type="submit" class="btn btn-default w3-teal"><i class="fa fa-spinner fa-lg fa-pulse" ng-if="post"></i> Submit</button>
 			
 			</form>
@@ -46,27 +46,53 @@
 
 	<div class="w3-panel w3-teal">
 		<h1><i class="fa fa-home"></i> Home</h1>
-	</div> 
-
-	<p class="w3-margin">Welcome! We are glad that you are participating in this study.</p>
-	<br>
-	<br>
-	<div class="w3-margin">
-		<h3 class="w3-text-teal">Your Profile</h3>
-		<hr>
-		
-		<div ng-if="loading">
-			<i class="fa fa-spinner fa-pulse fa-3x fa-fw w3-text-teal"></i>
-		</div>
-		<div ng-if="!loading">
-			<h4 class="w3-text-teal">Profession: {{profession}}</h4>
-			<br>
-			<h4 class="w3-text-teal">Years working: {{year}}</h4>
-			<br>
-			<h4 class="w3-text-teal">Months working: {{month}}</h4>
-			<br>
-		</div>
 	</div>
+
+
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" data-target="#info" href=""><i class="fa fa-comment"></i> About</a></li>
+		<li><a data-toggle="tab" data-target="#profile" href=""><i class="fa fa-user-circle-o"></i> Profile</a></li>
+	</ul>
+
+	<div class="tab-content">
+   
+		<div id="info" class="tab-pane fade in active">
+			<div class="w3-margin">
+				<h3>Welcome!</h3>
+				<hr>
+				We are glad that you are participating in this study.
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dictum sapien elit, in venenatis tortor vestibulum quis. 
+				Suspendisse scelerisque eros sed arcu dignissim imperdiet ac sed ex. Ut maximus augue sed velit molestie, eu feugiat turpis mollis. 
+				Aliquam ultricies metus sed eros maximus, ac feugiat neque luctus.
+			
+			</div>
+		</div>
+		
+		<div id="profile" class="tab-pane fade">
+			<div class="w3-margin">
+				<h3>Your Profile</h3>
+				<hr>
+				
+				<div ng-if="loading">
+					<i class="fa fa-spinner fa-pulse fa-3x fa-fw w3-text-teal"></i>
+				</div>
+				<div ng-if="!loading">
+					<h4>Profession: {{profession}}</h4>
+					<br>
+					<h4>Years working: {{year}}</h4>
+					<br>
+					<h4>Months working: {{month}}</h4>
+					<br>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	
+	<br>
+	<br>
+	
 	
 <!-- End page content -->
 </div>
