@@ -8,12 +8,6 @@
 	</div> 
 
 	<div class="w3-margin">
-		
-		<!--
-		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="tab" data-target="#overview" href="" ng-click="getSessions()"><i class="fa fa-area-chart"></i> Overview</a></li>
-			<li><a data-toggle="tab" data-target="#sessions" href=""><i class="fa fa-desktop"></i> Sessions</a></li>
-		</ul>-->
 
 		<div class="w3-card">
 		
@@ -23,7 +17,7 @@
 				<button class="w3-bar-item w3-button w3-mobile"><i class="fa fa-youtube"></i> Learn</button>
 			</div>
 		   
-		   <div ng-show="showOverview">
+		   <div ng-show="showOverview" class="w3-animate-opacity">
 				<br>
 				<ul class="nav nav-tabs">
 					<li class="active"><a data-toggle="tab" data-target="#freq" href=""><i class="fa fa-bar-chart"></i> Freq</a></li>
@@ -49,7 +43,7 @@
 			</div>
 			
 			
-			<div ng-show="showSessions">
+			<div ng-show="showSessions" class="w3-animate-opacity">
 				<br>
 				<ul class="nav nav-tabs">
 					<li class="active"><a data-toggle="tab" data-target="#logbok" href=""><i class="fa fa-book"></i> Logbok</a></li>
@@ -61,7 +55,6 @@
 					<div id="logbok" class="tab-pane fade in active">
 						<span><i class="fa fa-search w3-margin"></i></span><input type="text" placeholder="search" ng-model="search"/>
 					
-						
 							<table class="w3-table w3-striped w3-centered">
 								
 								<tr>
@@ -69,7 +62,8 @@
 									<th>Your Angle</th>
 									<th>Correct Angle</th>
 								</tr>
-								{{loading}}
+								
+								<center ng-if="loading"><i class="fa fa-spinner fa-lg fa-pulse"></i></center>
 								
 								<tr ng-repeat="x in sessions | filter:search">
 									<td>{{ x.date }}</td>
@@ -92,8 +86,7 @@
 								<input class="w3-input" type="number" ng-model="correct">
 								<label>Correct Angle</label>
 							</p>
-							{{post}}
-							<button class="w3-button w3-card w3-teal" ng-click="logangle(angle,correct)"><i class="fa fa-cog"></i> Log</button>
+							<button class="w3-button w3-card w3-teal" ng-click="logangle(angle,correct)"><i class="fa fa-spinner fa-lg fa-pulse" ng-if="post"></i> Submit</button>
 						</form>
 					
 					</div>

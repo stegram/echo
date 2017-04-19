@@ -31,15 +31,10 @@
 					<span>Months:</span> <input type="number" ng-model="month" class="form-control" required>
 				</div>
 				
-				{{post}}<button type="submit" class="btn btn-default w3-teal">Submit</button>
+				<button type="submit" class="btn btn-default w3-teal"><i class="fa fa-spinner fa-lg fa-pulse" ng-if="post"></i> Submit</button>
 			
 			</form>
 		</div>
-		
-		<!--
-		<div class="modal-footer">
-		  
-		</div>-->
 	  
 	  </div>
 	  
@@ -59,13 +54,18 @@
 	<div class="w3-margin">
 		<h3 class="w3-text-teal">Your Profile</h3>
 		<hr>
-		{{loading}}
-		<h4 class="w3-text-teal">Profession: {{profession}}</h4>
-		<br>
-		<h4 class="w3-text-teal">Years working: {{year}}</h4>
-		<br>
-		<h4 class="w3-text-teal">Months working: {{month}}</h4>
-		<br>
+		
+		<div ng-if="loading">
+			<i class="fa fa-spinner fa-pulse fa-3x fa-fw w3-text-teal"></i>
+		</div>
+		<div ng-if="!loading">
+			<h4 class="w3-text-teal">Profession: {{profession}}</h4>
+			<br>
+			<h4 class="w3-text-teal">Years working: {{year}}</h4>
+			<br>
+			<h4 class="w3-text-teal">Months working: {{month}}</h4>
+			<br>
+		</div>
 	</div>
 	
 <!-- End page content -->
