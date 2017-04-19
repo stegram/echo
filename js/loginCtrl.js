@@ -1,54 +1,38 @@
-echoApp.controller('loginCtrl', function ($scope,$location, echo) {
+echoApp.controller('loginCtrl', function ($scope, $timeout, $location, echo) {
 
 $scope.user = "";
-$scope.password = "";
-
-//$scope.show = false;
-
+$scope.show = false;
 $scope.accept = false;
 
 $scope.login = function() {
-	$('i').addClass('fa-spin');
-	
-	echo.registeredUsers.get({},function(users){
+	if (!$scope.user)
+		return;
 
-		for(name in users){
+	$scope.loading = true;
+	$scope.wrongUser = false;
 
-			if(name == $scope.user){
+	var syncObject = echo.checkUser($scope.user);
+	//syncObject.$bindTo($scope, "usr");
+	syncObject.$loaded(function (user) {
+		var exists = user.$value !== null;
+		$scope.loading = false;
 
-				if(users[name].password == $scope.password){
-					
-					$scope.accept = false;
-					
-					echo.setLoginUser(users[name]);
-					
-					$('form').removeClass('ahashakeheartache');
-					
-					if(users[name].title == "admin"){
-						$location.path('/students');
-					}else{
-						$location.path('/home');
-					};
+		if(exists){
+			echo.setUser(user);
+			echo.setLastLogin();
 
-					return;
-				};
-			};
-				
-		};
-		
-		$('form').addClass('ahashakeheartache');
-		
-		$('form').on('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e){
-			$('form').delay(200).removeClass('ahashakeheartache');
-		});
-		
-		$scope.accept = true;
-		$('i').removeClass('fa-spin');
-		
-	}, function(data){
-			console.log("there was an error!");
+			if(user.isAdmin)
+				$location.path('/users');
+			else
+				$location.path('/home');
+		}else{
+			$scope.wrongUser = true;
+			$('form').addClass('ahashakeheartache');
+			$('form').on('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e){
+				$('form').removeClass('ahashakeheartache');
+			});
+		}
 	});
-	
 };
 
 
