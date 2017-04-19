@@ -4,6 +4,7 @@ echoApp.controller('examCtrl', function ($scope, echo) {
 	$scope.showOldExams = false;
 	$scope.exam;
 	$scope.i = -1;
+	$scope.isSubmitted = false;
 
 	$scope.toggleExamList = function(){
 		$scope.showExamList = !$scope.showExamList;
@@ -38,14 +39,15 @@ echoApp.controller('examCtrl', function ($scope, echo) {
 
 	};
 
-
-	<!-- SKRÄP -->
+	$scope.back = function(){
+		$scope.isSubmitted = false;
+	};
 
 	$scope.submit = function(){
 		var result = echo.judge($scope.exam);
 		echo.saveTakenExam($scope.exam);
-
-		alert(result ? "YAY!" : "nej :(");
+		$scope.isSubmitted = true;
+		//alert(result ? "YAY!" : "nej :(");
 	}
 
 });
