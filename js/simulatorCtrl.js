@@ -66,11 +66,11 @@ var lineChart = new Chart(line, errorConfig);
 
 $scope.getSessions = function(){
 
-	$scope.loading = "loading...";
+	$scope.loading = true;
 
 	echo.loggedSessions.get({name:user.name}, function(data){
 
-			$scope.loading = "";
+			$scope.loading = false;
 
 			$scope.sessions = $.map(data, function(value, index) {
 				if(typeof value == 'object')
@@ -122,11 +122,11 @@ $scope.getSessions = function(){
 $scope.getSessions();
 
 $scope.logangle = function(your, correct){
-	$scope.post = "posting...";
+	$scope.post = true;
 	if(user != undefined){
 		echo.angles.log({name:user.name}, {date:echo.getCurrentDate(), your:your, correct:correct}, function(){
 
-			$scope.post = "";
+			$scope.post = false;
 			$scope.getSessions();
 		});
 

@@ -3,10 +3,10 @@ echoApp.controller('homeCtrl', function ($scope, echo) {
 var user = echo.getLoginUser();
 
 function getForm(){
-	$scope.loading = "loading...";
+	$scope.loading = true;
 	echo.firstQuestions.get({name:user.name}, function(data){
 
-		$scope.loading = "";
+		$scope.loading = false;
 		$scope.profession = data.profession;
 		$scope.year = data.year;
 		$scope.month = data.month;
@@ -19,7 +19,7 @@ function getForm(){
 
 $scope.sendForm = function(profession,year,month){
 
-	$scope.post = "posting...";
+	$scope.post = true;
 	if(user != undefined){
 		user.first = false;
 
@@ -29,10 +29,10 @@ $scope.sendForm = function(profession,year,month){
 
 			// Set first in other databse (user and exam database)
 			echo.setFirst(false);
-
-			$scope.post = "succesful!";
+			
+			$scope.post = false;
 			getForm();
-			$("#myModal").modal("hide");
+			$('#myModal').modal('hide');
 		});
 
 	};
@@ -40,7 +40,10 @@ $scope.sendForm = function(profession,year,month){
 };
 
 if(user.first == true){
-	$("#myModal").modal()
+	$('#myModal').modal({
+		backdrop: 'static',
+		keyboard: false
+	})
 
 }else{
 	getForm();
