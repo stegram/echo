@@ -156,9 +156,13 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 
 	this.addUser= function (user) {
 		var ref = firebase.database().ref().child("users");
-		var obj = $firebaseObject(ref);
+		//var obj = $firebaseObject(ref);
 		ref.child(user).set("null");
+	}
 
+	this.removeUser= function (user) {
+		var ref = firebase.database().ref().child("users");
+		ref.child(user).remove();
 	}
 
   return this;

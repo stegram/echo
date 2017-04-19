@@ -32,8 +32,11 @@
 				<form name="addRemoveForm" ng-submit="submit()">
 					<input name="newUser" type="text" class="form-control" placeholder="name" ng-model="newUser"/>
 					<br>
-					<button type="button" class="w3-button w3-card w3-teal" ng-click="toggleAllUsers()"><i class="fa fa-arrow-left"></i> Back</button>
+
+					<button type="button" class="w3-button w3-card w3-teal" ng-click="toggleAllUsers(); userExists = false; userWasAdded = false"><i class="fa fa-arrow-left"></i> Back</button>
 					<button class="w3-button w3-card w3-teal" ng-click=""><i class="fa fa-user-plus"></i> Add user</button>
+          <div ng-show="userExists"><center class="w3-text-red">User already exists</center></div>
+          <div ng-show="userWasAdded && !userExists"><center class="w3-text-green">User was sucessfully added</center></div>
 				</form>
 			</div>
 
@@ -41,7 +44,7 @@
 				<h3>Some info about: {{user.$id}} </h3>
 				<br>
 				<button type="button" class="w3-button w3-card w3-teal" ng-click="toggleAllUsers(); toggleUser()"><i class="fa fa-arrow-left"></i> Back</button>
-				<button class="w3-button w3-card w3-teal" ng-click="toggleAllUsers()"><i class="fa fa-user-times"></i> Remove user</button>
+				<button class="w3-button w3-card w3-teal" ng-click="toggleAllUsers(); toggleUser(); removeUser(user.$id)"><i class="fa fa-user-times"></i> Remove user</button>
 			</div>
 
 		</div>
