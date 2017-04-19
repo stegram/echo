@@ -21,9 +21,9 @@ $scope.login = function() {
 			echo.setUser(user);
 
 			if(user.isAdmin)
-				$location.path('/students');
+				$location.path('/users');
 			else
-				$location.path('/exam');
+				$location.path('/home');
 		}else{
 			$scope.wrongUser = true;
 			$('form').addClass('ahashakeheartache');

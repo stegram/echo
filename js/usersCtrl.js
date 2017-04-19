@@ -1,4 +1,4 @@
-echoApp.controller('studentsCtrl', function ($scope, echo) {
+echoApp.controller('usersCtrl', function ($scope, echo) {
 $scope.user = {};
 $scope.showAllUsers = true;
 $scope.showUser = false;
