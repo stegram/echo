@@ -3,13 +3,11 @@
 <!-- !PAGE CONTENT! -->
 <div class="rs-exam w3-main w3-white w3-card w3-animate-right" style="margin-left:312px;margin-top:118px;">
 
-	<div class="w3-panel w3-teal" ng-show="showExamList">
-		<h1>Exam</h1>
+	<div class="w3-panel w3-teal">
+		<h1><i class="fa fa-graduation-cap"></i>Exam</h1>
 	</div>
 
 	<div class="w3-margin">
-		<i class="fa fa-graduation-cap w3-margin" style="font-size:70px;color:teal;" ng-show="showExamList"></i>
-		<br>
 
 		<ul class="w3-ul w3-hoverable w3-card-4 w3-animate-right" ng-show="showExamList">
 			<li class="w3-hover-white w3-teal" ng-repeat="exam in exams" ng-click="setExam(exam); setI($index); toggleExamList()">

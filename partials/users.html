@@ -4,13 +4,11 @@
 <div class="w3-main w3-white w3-card w3-animate-right" style="margin-left:312px;margin-top:118px;">
 
 	<div class="w3-panel w3-teal">
-		<h1>Users</h1>
+		<h1><i class="fa fa-user"></i>Users</h1>
 	</div>
 
 	<div class="w3-margin">
 		<div ng-show="showAllUsers">
-			<i class="fa fa-user w3-margin" style="font-size:70px;color:teal;"></i>
-			<br>
 
 			<ul class="w3-ul w3-hoverable w3-card-4 w3-teal w3-animate-right">
 				<li class="w3-hover-white" ng-repeat="user in allUsers" ng-click="setUser(user); toggleAllUsers(); toggleUser()">
