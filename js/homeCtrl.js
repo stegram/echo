@@ -20,22 +20,25 @@ function getForm(){
 $scope.sendForm = function(profession,year,month){
 
 	$scope.post = true;
-	if(user != undefined){
+	//if(user != undefined){
 		user.first = false;
 
 		echo.firstSubmit.submit({name:user.name}, {profession:profession, year:year, month:month}, function(){
 
-			echo.updateUser.update({name:user.name},{first:user.first});
+			// bort
+			//echo.updateUser.update({name:user.name},{first:user.first});
 
 			// Set first in other databse (user and exam database)
 			echo.setFirst(false);
-			
+
 			$scope.post = false;
 			getForm();
 			$('#myModal').modal('hide');
+			$('body').removeClass('modal-open');
+			$('.modal-backdrop').remove();
 		});
 
-	};
+	//};
 
 };
 

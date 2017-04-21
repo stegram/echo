@@ -19,7 +19,7 @@ $scope.login = function() {
 
 		if(exists){
 			echo.setUser(user);
-			echo.setLastLogin();
+			//echo.setLastLogin();
 
 			if(user.isAdmin)
 				$location.path('/users');

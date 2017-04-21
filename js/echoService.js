@@ -21,34 +21,38 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 	var user = {};
 	var sessions = {};
 
-	this.registeredUsers = $resource('https://test-fcf8a.firebaseio.com/users/.json');
+	// bort
+	//this.registeredUsers = $resource('https://test-fcf8a.firebaseio.com/users/.json');
 
 	this.loggedSessions = $resource('https://test-fcf8a.firebaseio.com/data/:name/simulator/.json');
 
 	this.firstQuestions = $resource('https://test-fcf8a.firebaseio.com/data/:name/firstQuestions/.json');
 
-	this.getSessions = function(){
+	/*this.getSessions = function(){
 		return sessions;
-	};
+	};*/
 
-	this.saveSessions = function(set){
+	/*this.saveSessions = function(set){
 		sessions = set;
-	};
+	};*/
 
-	this.setLoginUser = function(selected){
+	/*this.setLoginUser = function(selected){
 		user = selected;
-	};
+	};*/
 
 	this.getLoginUser = function(){
 		var loggedUser = this.getUser();
 		loggedUser.name = loggedUser.$id;
-		//loggedUser.lastlogin = this.getCurrentDate();
+		loggedUser.lastlogin = loggedUser.lastLogin;
+		//console.log(loggedUser);
 		return loggedUser;
 	};
 
-	this.lastLogin = $resource('https://test-fcf8a.firebaseio.com/users/:name/.json',{},{
+	// bort
+	/*
+	this.lastLogin = $resource('https://test-fcf8a.firebaseio.com/data/:name/.json',{},{
 		update: {method: 'PATCH'}
-	});
+	});*/
 
 	this.angles = $resource('https://test-fcf8a.firebaseio.com/data/:name/simulator/.json',{},{
 		log: {method: 'POST'}
@@ -58,9 +62,10 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 		submit: {method: 'PATCH'}
 	});
 
-	this.updateUser = $resource('https://test-fcf8a.firebaseio.com/users/:name/.json',{},{
+	// bort
+	/*this.updateUser = $resource('https://test-fcf8a.firebaseio.com/users/:name/.json',{},{
 		update: {method: 'PATCH'}
-	});
+	});*/
 
 	this.getCurrentDate = function(){
 		return date;
@@ -77,7 +82,12 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 	var currentUser = {};
 
 	this.setLastLogin = function() {
-		currentUser.lastlogin = this.getCurrentDate();
+		//currentUser.lastlogin = this.getCurrentDate();
+		var ref = firebase.database().ref().child("users");
+		//var obj = $firebaseObject(ref);
+		//ref.child(this.getUser().$id).child("lastLogin").set({"lastLogin": this.getCurrentDate()});
+		ref.child(this.getUser().$id).child("lastLogin").set(this.getCurrentDate());
+
 	};
 
 	this.checkUser = function(username){
