@@ -1,6 +1,6 @@
 echoApp.controller('dashboardCtrl', function ($scope, echo,$location,$timeout) {
 
-$scope.user = function(){ 
+$scope.user = function(){
 	return echo.getLoginUser();
 };
 
@@ -26,13 +26,14 @@ $scope.w3_close = function() {
 }
 
 $scope.logout = function(){
-	
+
 	document.getElementById('logout').style.display='block';
 
 		$timeout(function(){
 			echo.setLastLogin();
 			document.getElementById('logout').style.display='none';
 			echo.clearCookies();
+			echo.setLoggedIn(false);
 			$location.path('/login');
 		},1000);
 

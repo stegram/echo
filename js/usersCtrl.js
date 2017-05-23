@@ -1,4 +1,8 @@
-echoApp.controller('usersCtrl', function ($scope, echo) {
+echoApp.controller('usersCtrl', function ($scope, echo, $location) {
+  if(!echo.getLoggedIn()){
+    $location.path('/login');
+  }
+
   $scope.user = {};
   $scope.showAllUsers = true;
   $scope.showUser = false;

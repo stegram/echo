@@ -1,4 +1,7 @@
-echoApp.controller('simulatorCtrl', function ($scope,echo) {
+echoApp.controller('simulatorCtrl', function ($scope,echo, $location) {
+	if(!echo.getLoggedIn()){
+		$location.path('/login');
+	}
 
 var user = echo.getUserId();
 var your_angle = 0;
@@ -19,7 +22,7 @@ $scope.showLearn = false;
 function getWeek(month,day){
 	for(var i = 1; i <= 12; i++){
 		if(month == i){
-			
+
 		};
 	};
 };
@@ -69,16 +72,16 @@ $scope.getSessions = function(){
 			relError = [];
 			labelError = [];
 			sessionsPerMonth = [0,0,0,0,0,0,0,0,0,0,0,0];
-			
+
 			$scope.loading = false;
-			
+
 			$scope.sessions = [];
-			
+
 			for(x in data){
 				if(typeof data[x] == 'object')
 					$scope.sessions.push(data[x]);
 			};
-			
+
 			$scope.sessions.pop(); //remove c object from array
 
 			var i = 1;
@@ -108,7 +111,7 @@ $scope.getSessions = function(){
 				barMonthChart.data.datasets[0].data = relError;
 				barMonthChart.data.labels = labelError;
 			};
-			
+
 			barMonthChart.update();
 
 	}, function(data){
@@ -121,17 +124,17 @@ $scope.getSessions();
 
 $scope.switchAxis = function(interval){
 	var weeks = [];
-	
+
 	for(var i = 1; i <= 52; i++)
 		weeks.push(i);
-	
+
 	if(interval == "week"){
 		barMonthChart.data.labels = weeks;
 		barMonthChart.update();
 	}else{
 		barMonthChart.data.labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 		barMonthChart.update();
-	};	
+	};
 };
 
 $scope.switchGraph = function(graph){
@@ -144,7 +147,7 @@ $scope.switchGraph = function(graph){
 				borderWidth: 1,
 				fill: false
 			};
-		barMonthChart.options.scales.xAxes[0].gridLines.offsetGridLines = false;			
+		barMonthChart.options.scales.xAxes[0].gridLines.offsetGridLines = false;
 		barMonthChart.data.labels = labelError;
 		barMonthChart.update();
 	}else{
@@ -155,12 +158,12 @@ $scope.switchGraph = function(graph){
 				borderColor: 'rgba(54, 162, 235, 1)',
 				borderWidth: 1
 			};
-		
+
 		barMonthChart.options.scales.xAxes[0].gridLines.offsetGridLines = true;
 		barMonthChart.data.labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 		$scope.week = true;
 		barMonthChart.update();
-	};	
+	};
 };
 
 $scope.logangle = function(your, correct){
