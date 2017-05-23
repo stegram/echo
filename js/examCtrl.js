@@ -1,4 +1,7 @@
-echoApp.controller('examCtrl', function ($scope, echo) {
+echoApp.controller('examCtrl', function ($scope, echo, $location) {
+	if(!echo.getLoggedIn()){
+		$location.path('/login');
+	}
 
 	$scope.showExamList = true;
 	$scope.showOldExams = false;
@@ -31,7 +34,6 @@ echoApp.controller('examCtrl', function ($scope, echo) {
 	$scope.getExams = function(){
 		if($scope.showOldExams) {
 			$scope.exams = echo.getTakenExams();
-			//console.log($scope.exams);
 		}else if (!$scope.showOldExams){
 		$scope.exams = echo.getAllExams();
 		} else {
@@ -48,7 +50,6 @@ echoApp.controller('examCtrl', function ($scope, echo) {
 		var result = echo.judge($scope.exam);
 		echo.saveTakenExam($scope.exam);
 		$scope.isSubmitted = true;
-		//alert(result ? "YAY!" : "nej :(");
 	}
 
 });

@@ -6,7 +6,7 @@ echoApp.config(['$routeProvider',
     $routeProvider.
       when('/login', {
         templateUrl: 'partials/login.html',
-		controller: 'loginCtrl'
+	      controller: 'loginCtrl'
       }).
       when('/dashboard', {
         templateUrl: 'partials/dashboard.html',

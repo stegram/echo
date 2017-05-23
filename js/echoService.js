@@ -35,6 +35,18 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 
 	/* ---------------------------------------------------------------------------*/
 
+	this.setLoggedIn = function(bool){
+		if (bool){
+			$cookieStore.put('loggedIn','loggedIn');
+		}else {
+			$cookieStore.remove('loggedIn');
+		}
+	}
+
+	this.getLoggedIn = function(){
+		return $cookieStore.get('loggedIn');
+	}
+
 	var currentUser = {};
 	var userId ="";
 	var first = true;
