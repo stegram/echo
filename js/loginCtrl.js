@@ -4,6 +4,9 @@ $scope.user = "";
 $scope.show = false;
 $scope.accept = false;
 
+echo.setLoggedIn(false);
+echo.clearCookies();
+
 $scope.login = function() {
 	if (!$scope.user)
 		return;
