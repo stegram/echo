@@ -11,7 +11,7 @@
 		<div ng-show="showAllUsers">
 
 			<ul class="w3-ul w3-hoverable w3-card-4 w3-teal w3-animate-right">
-				<li class="w3-hover-white" ng-repeat="user in allUsers" ng-click="setUser(user); toggleAllUsers(); toggleUser()">
+				<li class="w3-hover-white" style="cursor:pointer" ng-repeat="user in allUsers" ng-click="setUser(user); toggleAllUsers(); toggleUser()">
 					<i class="fa fa-user"></i>  {{user.$id}}<span class="w3-right"></span>
 				</li>
 			</ul>

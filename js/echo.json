@@ -1,6 +1,0 @@
-{
-		'cristina' : {'title' : "bma", 'password' : "hejhej", 'lastlogin' : "2017-03-29",
-			'data' : {}},
-		'robin' : {'title' : "admin", 'password' : "null", 'lastlogin' : "2017-03-29",
-			'data' : {}}
-	};

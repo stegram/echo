@@ -1,43 +1,178 @@
 <ng-include src="'partials/dashboard.html'" ng-controller="dashboardCtrl"></ng-include>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-	<div class="modal-dialog">
+<div class="w3-modal" id="firstModal" style="z-index:5">
+	<div class="w3-modal-content">
 
-	  <!-- Modal content-->
-	  <div class="modal-content">
-	  
-		<div class="modal-header w3-teal">
-		  <h4 class="modal-title">First Time Questions</h4>
+		<div class="w3-bar w3-teal">
+			<h4 class="w3-margin">First Time Questions</h4>
 		</div>
-		
-		<div class="modal-body">
-		  
-			<div class="w3-cell-row w3-margin-bottom">
-				<i class="fa fa-user-md w3-cell w3-margin" style="font-size:70px;color:teal;"></i>
-				<div class="w3-cell w3-cell-middle">Please answer the following questions before you start.</div>
-			</div>
-		  
-			<form ng-submit="sendForm(profession,year,month)">
-		
-				<div class="w3-cell">
-					<p class="question">1. What is you profession?</p>
-					<input type="text" ng-model="profession" class="form-control" required>
-				</div>
-				<br>
-				<div class="w3-cell">
-					<p class="question">2. How long have you been working with echochardiography?</p>
-					<span>Years:</span> <input type="number" ng-model="year" class="form-control" required>
-					<span>Months:</span> <input type="number" ng-model="month" class="form-control" required>
-				</div>
-				<br>
-				<button type="submit" class="btn btn-default w3-teal"><i class="fa fa-spinner fa-lg fa-pulse" ng-if="post"></i> Submit</button>
-			
-			</form>
+
+		<div class="w3-cell-row w3-margin-bottom">
+			<i class="fa fa-user-md w3-cell w3-margin" style="font-size:70px;color:teal;"></i>
+			<div class="w3-cell w3-cell-middle">Please answer the following questions before you start.</div>
 		</div>
-	  
-	  </div>
-	  
+
+		<form class="w3-margin" ng-submit="sendForm(profession,practised,sessionsPerYear,sessionsPerMonth,sessionsPerWeek,answersPerYear,answersPerMonth,answersPerWeek,writing,supervision)">
+
+			What is your profession?
+			<br>
+			<select ng-model="profession" required>
+				<option value="">Select profession</option>
+				<option value="BMA">BMA</option>
+				<option value="SSK">SSK</option>
+				<option value="ST-Läkare">ST-Läkare</option>
+				<option value="Enkel specialist">Enkel specialist</option>
+				<option value="Kardiolog">Kardiolog</option>
+			</select>
+			<br>
+			<br>
+			How long have you practised echochardiography?
+			<br>
+			<select ng-model="practised" required>
+				<option value="">Select duration</option>
+				<option value="Never">Never</option>
+				<option value="< 1 week"> < 1 week </option>
+				<option value="1 - 2 weeks"> 1 - 2 weeks </option>
+				<option value="2 - 4 weeks"> 2 - 4 weeks </option>
+				<option value="1 - 2 months"> 1 - 2 months </option>
+				<option value="2 - 4 months"> 2 - 4 months </option>
+				<option value="4 - 6 months"> 4 - 6 months </option>
+				<option value="6 - 12 months"> 6 - 12 months </option>
+				<option value="1 - 2 years"> 1 - 2 years </option>
+				<option value="2 - 4 years"> 2 - 4 years </option>
+				<option value="4 - 6 years"> 4 - 6 years </option>
+				<option value="6 - 10 years"> 6 - 10 years </option>
+				<option value="> 10 years"> > 10 years </option>
+			</select>
+			<br>
+			<br>
+			Estimate how many sessions you have done during the last year.
+			<br>
+			<select ng-model="sessionsPerYear" required>
+				<option value="">Select amount</option>
+				<option value="0 - 10">0 - 10</option>
+				<option value="10 - 50">10 - 50</option>
+				<option value="10 - 50">10 - 50</option>
+				<option value="50 - 100">50 - 100</option>
+				<option value="100 - 500">100 - 500</option>
+				<option value="500 - 1000">500 - 1000</option>
+				<option value="> 1000"> > 1000</option>
+			</select>
+			<br>
+			<br>
+
+			Sessions you have done during the last month.
+			<br>
+			<select ng-model="sessionsPerMonth" required>
+				<option value="">Select amount</option>
+				<option value="0 - 10<">0 - 10</option>
+				<option value="10 - 50">10 - 50</option>
+				<option value="10 - 50">10 - 50</option>
+				<option value="50 - 100">50 - 100</option>
+				<option value="100 - 200">100 - 200</option>
+				<option value="> 200"> > 200</option>
+			</select>
+			<br>
+			<br>
+			Sessions you have done during the last week.
+			<br>
+			<select ng-model="sessionsPerWeek" required>
+				<option value="">Select amount</option>
+				<option value="0 - 10">0 - 10</option>
+				<option value="10 - 20">10 - 20</option>
+				<option value="20 - 30">20 - 30</option>
+				<option value="30 - 50">30 - 50</option>
+				<option value="> 50"> > 50</option>
+			</select>
+			<br>
+			<br>
+
+			Estimate how many answers you have written during the last year.
+			<br>
+			<select ng-model="answersPerYear" required>
+				<option value="">Select amount</option>
+				<option value="0 - 10">0 - 10</option>
+				<option value="10 - 50">10 - 50</option>
+				<option value="10 - 50">10 - 50</option>
+				<option value="50 - 100">50 - 100</option>
+				<option value="100 - 500">100 - 500</option>
+				<option value="500 - 1000">500 - 1000</option>
+				<option value="> 1000"> > 1000</option>
+			</select>
+			<br>
+			<br>
+
+			Answers you have written during the last month.
+			<br>
+			<select ng-model="answersPerMonth" required>
+				<option value="">Select amount</option>
+				<option value="0 - 10<">0 - 10</option>
+				<option value="10 - 50">10 - 50</option>
+				<option value="10 - 50">10 - 50</option>
+				<option value="50 - 100">50 - 100</option>
+				<option value="100 - 200">100 - 200</option>
+				<option value="> 200"> > 200</option>
+			</select>
+			<br>
+			<br>
+			Answers you have written during the last week.
+			<br>
+			<select ng-model="answersPerWeek" required>
+				<option value="">Select amount</option>
+				<option value="0 - 10">0 - 10</option>
+				<option value="10 - 20">10 - 20</option>
+				<option value="20 - 30">20 - 30</option>
+				<option value="30 - 50">30 - 50</option>
+				<option value="> 50"> > 50</option>
+			</select>
+			<br>
+			<br>
+			How long have you been writing answers independently?
+			<br>
+			<select ng-model="writing" required>
+					<option value="">Select duration</option>
+				<option value="Never">Never</option>
+				<option value="< 1 week"> < 1 week </option>
+				<option value="1 - 2 weeks"> 1 - 2 weeks </option>
+				<option value="2 - 4 weeks"> 2 - 4 weeks </option>
+				<option value="1 - 2 months"> 1 - 2 months </option>
+				<option value="2 - 4 months"> 2 - 4 months </option>
+				<option value="4 - 6 months"> 4 - 6 months </option>
+				<option value="6 - 12 months"> 6 - 12 months </option>
+				<option value="1 - 2 years"> 1 - 2 years </option>
+				<option value="2 - 4 years"> 2 - 4 years </option>
+				<option value="4 - 6 years"> 4 - 6 years </option>
+				<option value="6 - 10 years"> 6 - 10 years </option>
+				<option value="> 10 years"> > 10 years </option>
+			</select>
+			<br>
+			<br>
+			If not, how long have you been writing answers with supervision?
+			<br>
+			<select ng-model="supervision" required>
+					<option value="">Select duration</option>
+				<option value="Never">Never</option>
+				<option value="< 1 week"> < 1 week </option>
+				<option value="1 - 2 weeks"> 1 - 2 weeks </option>
+				<option value="2 - 4 weeks"> 2 - 4 weeks </option>
+				<option value="1 - 2 months"> 1 - 2 months </option>
+				<option value="2 - 4 months"> 2 - 4 months </option>
+				<option value="4 - 6 months"> 4 - 6 months </option>
+				<option value="6 - 12 months"> 6 - 12 months </option>
+				<option value="1 - 2 years"> 1 - 2 years </option>
+				<option value="2 - 4 years"> 2 - 4 years </option>
+				<option value="4 - 6 years"> 4 - 6 years </option>
+				<option value="6 - 10 years"> 6 - 10 years </option>
+				<option value="> 10 years"> > 10 years </option>
+			</select>
+			<br>
+			<br>
+
+			<center>
+				<button type="submit" class="btn btn-default w3-teal w3-margin"><i class="fa fa-spinner fa-lg fa-pulse" ng-if="post"></i> Submit</button>
+			</center>
+
+		</form>
 	</div>
 </div>
 
@@ -48,40 +183,54 @@
 		<h1><i class="fa fa-home"></i> Home</h1>
 	</div>
 
-
 	<ul class="nav nav-tabs">
-		<li class="active"><a data-toggle="tab" data-target="#info" href=""><i class="fa fa-comment"></i> About</a></li>
-		<li><a data-toggle="tab" data-target="#profile" href=""><i class="fa fa-user-circle-o"></i> Profile</a></li>
+		<li ng-class="{active : !profile}"><a ng-click="profile = false" style="cursor:pointer"><i class="fa fa-comment"></i> About</a></li>
+		<li ng-class="{active : profile}"><a ng-click="profile = true; getForm()" style="cursor:pointer"><i class="fa fa-user-circle-o"></i> Profile</a></li>
 	</ul>
 
+
 	<div class="tab-content">
-   
-		<div id="info" class="tab-pane fade in active">
+
+		<div ng-show="!profile" ng-class="{'in active' : !profile}" class="tab-pane fade">
 			<div class="w3-margin">
 				<h3>Welcome!</h3>
 				<hr>
 				We are glad that you are participating in this study.
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dictum sapien elit, in venenatis tortor vestibulum quis. 
-				Suspendisse scelerisque eros sed arcu dignissim imperdiet ac sed ex. Ut maximus augue sed velit molestie, eu feugiat turpis mollis. 
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dictum sapien elit, in venenatis tortor vestibulum quis.
+				Suspendisse scelerisque eros sed arcu dignissim imperdiet ac sed ex. Ut maximus augue sed velit molestie, eu feugiat turpis mollis.
 				Aliquam ultricies metus sed eros maximus, ac feugiat neque luctus.
-			
+
 			</div>
 		</div>
-		
-		<div id="profile" class="tab-pane fade">
+
+		<div ng-show="profile" ng-class="{'in active' : profile}" class="tab-pane fade">
 			<div class="w3-margin">
-				<h3>Your Profile</h3>
+				<h3>First time questions.</h3>
 				<hr>
-				
+
 				<div ng-if="loading">
 					<i class="fa fa-spinner fa-pulse fa-3x fa-fw w3-text-teal"></i>
 				</div>
 				<div ng-if="!loading">
-					<h4>Profession: {{profession}}</h4>
+					<h4>Profession: <b>{{profession}}</b></h4>
 					<br>
-					<h4>Years working: {{year}}</h4>
+					<h4>Practised echochardiography: <b>{{practised}}</b></h4>
 					<br>
-					<h4>Months working: {{month}}</h4>
+					<h4>Sessions during last year: <b>{{sessionsPerYear}}</b></h4>
+					<br>
+					<h4>Sessions during last month: <b>{{sessionsPerMonth}}</b></h4>
+					<br>
+					<h4>Sessions during last week: <b>{{sessionsPerWeek}}</b></h4>
+					<br>
+					<h4>Written answers during last year: <b>{{answersPerYear}}</b></h4>
+					<br>
+					<h4>Written answers during last month: <b>{{answersPerMonth}}</b></h4>
+					<br>
+					<h4>Written answers during last week: <b>{{answersPerWeek}}</b></h4>
+					<br>
+					<h4>Writing answers independently: <b>{{writing}}</b></h4>
+					<br>
+					<h4>Writing answers with supervision: <b>{{supervision}}</b></h4>
 					<br>
 				</div>
 			</div>
@@ -89,10 +238,9 @@
 
 	</div>
 
-	
 	<br>
 	<br>
-	
-	
+
+
 <!-- End page content -->
 </div>

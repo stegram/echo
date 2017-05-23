@@ -1,5 +1,5 @@
 
-var echoApp = angular.module('echo', ['ngRoute','ngResource','ngSanitize','ngCookies', 'firebase']);
+var echoApp = angular.module('echo', ['ngRoute','ngResource','ngCookies', 'firebase']);
 
 echoApp.config(['$routeProvider',
   function($routeProvider) {

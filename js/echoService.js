@@ -1,8 +1,5 @@
 echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $firebaseObject) {
 
-	//id should prob be user names
-
-
 	var today = new Date();
 	var dd = today.getDate();
 	var mm = today.getMonth()+1; //January is 0!
@@ -18,41 +15,11 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 
 	var date = yyyy + '-' + mm + '-' + dd;
 
-	var user = {};
 	var sessions = {};
-
-	// bort
-	//this.registeredUsers = $resource('https://test-fcf8a.firebaseio.com/users/.json');
 
 	this.loggedSessions = $resource('https://test-fcf8a.firebaseio.com/data/:name/simulator/.json');
 
 	this.firstQuestions = $resource('https://test-fcf8a.firebaseio.com/data/:name/firstQuestions/.json');
-
-	/*this.getSessions = function(){
-		return sessions;
-	};*/
-
-	/*this.saveSessions = function(set){
-		sessions = set;
-	};*/
-
-	/*this.setLoginUser = function(selected){
-		user = selected;
-	};*/
-
-	this.getLoginUser = function(){
-		var loggedUser = this.getUser();
-		loggedUser.name = loggedUser.$id;
-		loggedUser.lastlogin = loggedUser.lastLogin;
-		//console.log(loggedUser);
-		return loggedUser;
-	};
-
-	// bort
-	/*
-	this.lastLogin = $resource('https://test-fcf8a.firebaseio.com/data/:name/.json',{},{
-		update: {method: 'PATCH'}
-	});*/
 
 	this.angles = $resource('https://test-fcf8a.firebaseio.com/data/:name/simulator/.json',{},{
 		log: {method: 'POST'}
@@ -62,45 +29,76 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 		submit: {method: 'PATCH'}
 	});
 
-	// bort
-	/*this.updateUser = $resource('https://test-fcf8a.firebaseio.com/users/:name/.json',{},{
-		update: {method: 'PATCH'}
-	});*/
-
 	this.getCurrentDate = function(){
 		return date;
 	};
 
-
-
-
-
 	/* ---------------------------------------------------------------------------*/
 
-
-
 	var currentUser = {};
-
-	this.setLastLogin = function() {
-		//currentUser.lastlogin = this.getCurrentDate();
-		var ref = firebase.database().ref().child("users");
-		//var obj = $firebaseObject(ref);
-		//ref.child(this.getUser().$id).child("lastLogin").set({"lastLogin": this.getCurrentDate()});
-		ref.child(this.getUser().$id).child("lastLogin").set(this.getCurrentDate());
-
-	};
+	var userId ="";
+	var first = true;
 
 	this.checkUser = function(username){
 		var ref = firebase.database().ref().child('users').child(username);
 		return $firebaseObject(ref);
 	};
 
+	if (!$cookieStore.get('userId')){
+		$cookieStore.put('userId',userId);
+	}else{
+		userId = $cookieStore.get('userId');
+	};
+
+	if ($cookieStore.get('first') == undefined){
+		$cookieStore.put('first',first);
+	}else{
+		first = $cookieStore.get('first');
+	};
+
+	this.clearCookies = function(){
+		$cookieStore.remove('userId');
+		$cookieStore.remove('first');
+	};
+
 	this.setUser = function(user){
 		currentUser = user;
+		userId = currentUser.$id;
+		$cookieStore.put('userId',currentUser.$id);
+
+		first = currentUser.first;
+		$cookieStore.put('first',currentUser.first);
+	};
+
+	this.getUserId = function(){
+		return userId;
+	};
+
+	this.setLastLogin = function() {
+		var ref = firebase.database().ref().child("users");
+		ref.child(this.getUser().$id).child("lastLogin").set(this.getCurrentDate());
+
 	};
 
 	this.getUser = function(){
-		return currentUser;
+		if(currentUser.$id != undefined){
+			return currentUser;
+		}else{
+			var syncObject = this.checkUser(userId);
+			return syncObject.$loaded(function (user) {
+
+				currentUser = user;
+				$cookieStore.put('userId',currentUser.$id);
+
+				return currentUser;
+
+			});
+		};
+	};
+
+	//interface between code from stefan and robin
+	this.getLoginUser = function(){
+		return this.getUser();
 	};
 
 	this.judge = function (exam) {
@@ -133,13 +131,11 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 	};
 
 	this.getTakenExams = function () {
-		// Get all the users taken exams
-		var ref = firebase.database().ref().child("users").child(this.getUser().$id).child("exams");
+		var ref = firebase.database().ref().child("users").child(userId).child("exams");
 		return $firebaseArray(ref);
 	};
 
 	this.saveTakenExam = function (exam) {
-		// Save the whole exam under the users exams
 		var userExams = this.getTakenExams();
 		userExams.$add(exam);
 	};
@@ -167,9 +163,6 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 			return exams;
 	};
 
-	var getImage = {
-	};
-
 	this.getAllUsers = function(){
 		var ref = firebase.database().ref().child("users");
 		return $firebaseArray(ref);
@@ -177,7 +170,6 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 
 	this.addUser= function (user) {
 		var ref = firebase.database().ref().child("users");
-		//var obj = $firebaseObject(ref);
 		ref.child(user).set({"first": true});
 	};
 
@@ -187,9 +179,17 @@ echoApp.factory('echo',function ($resource, $cookieStore, $firebaseArray, $fireb
 	};
 
 	this.setFirst = function(bool){
+		$cookieStore.put('first',bool);
+
+		first = bool;
+
 		var ref = firebase.database().ref().child("users");
-		ref.child(this.getUser().$id).set({"first": bool});
+		ref.child(userId).set({"first": bool});
 	};
+
+	this.getFirst = function(){
+		return first;
+	}
 
   return this;
 
