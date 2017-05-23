@@ -19,24 +19,26 @@
 		   
 		   <div ng-show="showOverview" class="w3-animate-opacity">
 				<br>
+				
 				<ul class="nav nav-tabs">
-					<li class="active"><a data-toggle="tab" data-target="#freq" href=""><i class="fa fa-bar-chart"></i> Freq</a></li>
-					<li><a data-toggle="tab" data-target="#error" href=""><i class="fa fa-line-chart"></i> Error</a></li>
+					<li ng-class="{active : freq}"><a ng-click="freq = true; switchGraph('frequency')" style="cursor:pointer"><i class="fa fa-bar-chart"></i> Frequency</a></li>
+					<li ng-class="{active : !freq}"><a ng-click="freq = false; switchGraph('error')" style="cursor:pointer"><i class="fa fa-line-chart"></i> Error</a></li>
 				</ul>
 
 				<div class="tab-content">
 				   
-					<div id="freq" class="tab-pane fade in active">
-						<div class="w3-container w3-padding-16">
-						  <canvas id="barChartMonth"></canvas>
-						</div>
+					<br>
+					<center ng-show="freq"><h4 ng-show="!week">Sessions Per Week</h4><h4 ng-show="week">Sessions Per Month</h4></center>
+					<center ng-show="!freq"><h4>Rel. Angle Error %</h4></center>
+					
+					<div class="w3-container w3-padding-16">
+					  <canvas id="barChartMonth" height="50" width="150"></canvas>
 					</div>
 					
-					<div id="error" class="tab-pane fade">
-						<div class="w3-container w3-padding-16">
-							<canvas id="lineChart"></canvas>
-						</div>
-					</div>
+					<center ng-show="freq">
+						<button ng-show="week" class="w3-button w3-round w3-card w3-teal" ng-click="switchAxis('week'); week = false">Toggle Week</button> 
+						<button ng-show="!week" class="w3-button w3-round w3-card w3-teal" ng-click="switchAxis('month'); week = true">Toggle Month</button>
+					</center>
 
 				</div>
 				
@@ -46,13 +48,13 @@
 			<div ng-show="showSessions" class="w3-animate-opacity">
 				<br>
 				<ul class="nav nav-tabs">
-					<li class="active"><a data-toggle="tab" data-target="#logbok" href=""><i class="fa fa-book"></i> Logbok</a></li>
-					<li><a data-toggle="tab" data-target="#log" href=""><i class="fa fa-pencil-square-o"></i> Log Session</a></li>
+					<li ng-class="{active : logbok}"><a ng-click="logbok = true" style="cursor:pointer"><i class="fa fa-book"></i> Logbok</a></li>
+					<li ng-class="{active : !logbok}"><a ng-click="logbok = false" style="cursor:pointer"><i class="fa fa-pencil-square-o"></i> Log Session</a></li>
 				</ul>
 				
 				<div class="tab-content">
 				
-					<div id="logbok" class="tab-pane fade in active">
+					<div ng-show="logbok" ng-class="{'in active' : logbok}" class="tab-pane fade">
 						<span><i class="fa fa-search w3-margin"></i></span><input type="text" placeholder="search" ng-model="search"/>
 					
 							<table class="w3-table w3-striped w3-centered">
@@ -74,7 +76,7 @@
 							</table>
 					</div>
 				
-					<div id="log" class="tab-pane fade">
+					<div ng-show="!logbok" ng-class="{'in active' : !logbok}" class="tab-pane fade">
 
 						<form class="w3-container w3-margin">
 							<p>
@@ -98,6 +100,7 @@
 		<br><br>
 
 		</div>
+		<br>
 	</div>		
 <!-- End page content -->
 </div>

@@ -1,55 +1,66 @@
 echoApp.controller('homeCtrl', function ($scope, echo) {
 
-var user = echo.getLoginUser();
+function user(){ 
+	return echo.getLoginUser();
+};
 
-function getForm(){
+$scope.profile = false;
+
+$scope.getForm = function(){
 	$scope.loading = true;
-	echo.firstQuestions.get({name:user.name}, function(data){
-
-		$scope.loading = false;
+	echo.firstQuestions.get({name:user().$id}, function(data){
+		
 		$scope.profession = data.profession;
-		$scope.year = data.year;
-		$scope.month = data.month;
-
+		$scope.practised = data.practised;
+		
+		$scope.sessionsPerYear = data.sessionsPerYear;
+		$scope.sessionsPerMonth = data.sessionsPerMonth;
+		$scope.sessionsPerWeek = data.sessionsPerWeek;
+		
+		$scope.answersPerYear = data.answersPerYear;
+		$scope.answersPerMonth = data.answersPerMonth;
+		$scope.answersPerWeek = data.answersPerWeek;
+		
+		$scope.writing = data.writing;
+		$scope.supervision = data.supervision;
+		
+		$scope.loading = false;
+		
 	}, function(){
 		alert("there was an error!");
 	});
 
 };
 
-$scope.sendForm = function(profession,year,month){
+$scope.sendForm = function(profession,practised,sessionsPerYear,sessionsPerMonth,sessionsPerWeek,answersPerYear,answersPerMonth,answersPerWeek,writing,supervision){
 
 	$scope.post = true;
-	//if(user != undefined){
-		user.first = false;
 
-		echo.firstSubmit.submit({name:user.name}, {profession:profession, year:year, month:month}, function(){
-
-			// bort
-			//echo.updateUser.update({name:user.name},{first:user.first});
+		echo.firstSubmit.submit({name:user().$id}, {profession:profession,practised:practised,sessionsPerYear:sessionsPerYear,sessionsPerMonth:sessionsPerMonth,sessionsPerWeek:sessionsPerWeek,answersPerYear:answersPerYear,answersPerMonth:answersPerMonth,answersPerWeek:answersPerWeek,writing:writing,supervision:supervision}, function(){
 
 			// Set first in other databse (user and exam database)
 			echo.setFirst(false);
 
 			$scope.post = false;
-			getForm();
-			$('#myModal').modal('hide');
-			$('body').removeClass('modal-open');
-			$('.modal-backdrop').remove();
+			$scope.getForm();
+			
+			document.getElementById('firstModal').style.display='none';
+	
 		});
-
-	//};
 
 };
 
-if(user.first == true){
-	$('#myModal').modal({
-		backdrop: 'static',
-		keyboard: false
-	})
-
+if(user().first == true){
+	document.getElementById('firstModal').style.display='block';
 }else{
-	getForm();
+	if(user().first == undefined){
+
+		if(echo.getFirst() == true){
+			document.getElementById('firstModal').style.display='block';
+		}else{
+			document.getElementById('firstModal').style.display='none';
+		};
+	};
 };
 
 });

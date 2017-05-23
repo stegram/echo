@@ -1,42 +1,40 @@
 echoApp.controller('dashboardCtrl', function ($scope, echo,$location,$timeout) {
 
-$scope.user = echo.getLoginUser();
+$scope.user = function(){ 
+	return echo.getLoginUser();
+};
 
+window.onload = function(){
+	var mySidebar = document.getElementById("mySidebar");
+}
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+$scope.w3_open = function() {
+	if (mySidebar.style.display === 'block') {
+		mySidebar.style.display = 'none';
+		$scope.overlayBg = false;
+	} else {
+		mySidebar.style.display = 'block';
+		$scope.overlayBg = true;
+	}
+}
+
+// Close the sidebar with the close button
+$scope.w3_close = function() {
+	mySidebar.style.display = "none";
+	$scope.overlayBg = false;
+}
 
 $scope.logout = function(){
-
-	$('#logout').modal({
-		backdrop: 'static',
-		keyboard: false
-	})
-
-	//$scope.onExit = true;
-
-	//if($scope.user.name != undefined){
-
-		echo.setLastLogin();
-		//bort
+	
+	document.getElementById('logout').style.display='block';
 
 		$timeout(function(){
-
-			$('#logout').modal('hide');
-			$('body').removeClass('modal-open');
-			$('.modal-backdrop').remove();
-
+			echo.setLastLogin();
+			document.getElementById('logout').style.display='none';
+			echo.clearCookies();
 			$location.path('/login');
 		},1000);
-
-		/*
-		echo.lastLogin.update({name:$scope.user.name}, {lastlogin:echo.getCurrentDate()},function(){
-
-		$('#logout').modal('hide');
-		$('body').removeClass('modal-open');
-		$('.modal-backdrop').remove();
-
-		$location.path('/login');
-		$scope.onExit = false;
-	});*/
-	//};
 
 };
 

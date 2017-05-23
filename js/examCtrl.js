@@ -31,6 +31,7 @@ echoApp.controller('examCtrl', function ($scope, echo) {
 	$scope.getExams = function(){
 		if($scope.showOldExams) {
 			$scope.exams = echo.getTakenExams();
+			//console.log($scope.exams);
 		}else if (!$scope.showOldExams){
 		$scope.exams = echo.getAllExams();
 		} else {
